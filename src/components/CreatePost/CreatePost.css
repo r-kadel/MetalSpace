@@ -1,0 +1,29 @@
+textarea {
+  resize: none;
+}
+
+.create-post {
+  width: 100%;
+  min-height: 100px;
+  margin-bottom: 1.3em;
+  border: 1px solid grey;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+}
+
+.create-post-textarea {
+  font-size: 1.125rem;
+  width: 100%;
+
+}
+
+.post-btn {
+  width: 105px;
+  font-size: 1.25rem;
+  border-radius: 8px;
+}
+
+.post-btn:hover {
+  background-color: red;
+}

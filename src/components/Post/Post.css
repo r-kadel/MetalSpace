@@ -1,0 +1,19 @@
+.post {
+  width: 100%;
+  border: 2px solid grey;
+  padding: 1em;
+  min-height: 100px;
+  margin-top: 1em;
+}
+
+.post-time {
+  margin: .5em 0;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.post-interactions {
+  display: flex;
+  justify-content: space-around;
+  margin-top: .5em;
+}

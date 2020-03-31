@@ -1,0 +1,25 @@
+.regis-form {
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  width: 70%;
+}
+
+.regis-form > label {
+  margin-top: .3em;
+  margin-bottom: .3em;
+}
+
+.regis-form > input {
+  font-size: 1rem;
+}
+
+.regis-btn {
+  margin-top: 1.5rem;
+  width: 100px;
+  align-self: center;
+}
+
+.regis-btn:hover {
+  background-color: #BADA55;
+}

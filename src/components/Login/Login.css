@@ -1,0 +1,26 @@
+.login-form {
+  font-size: .8rem;
+  display: flex;
+  flex-direction: column;
+  padding: .5em;
+  align-items: flex-start;
+}
+
+.login-form > label {
+  margin-top: .5em;
+  margin-bottom: .3em;
+}
+
+.login-form > input {
+  font-size: 1rem;
+}
+
+.login-submit {
+  width: 100px;
+  margin-top: .5em;
+  align-self: center;
+}
+
+.login-submit:hover {
+  background-color: #7CC6FE;
+}
