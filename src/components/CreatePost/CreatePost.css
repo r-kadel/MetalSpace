@@ -27,3 +27,7 @@ textarea {
 .post-btn:hover {
   background-color: red;
 }
+
+.comment-active:active {
+  background-color: aqua;
+}

@@ -15,7 +15,6 @@ function CreatePost() {
   }
 
   function createNewPost(newPost) {
-    console.log(newPost)
     const postToAdd = {postContent: newPost}
     setUserPosts(prevPosts => [...prevPosts, postToAdd] )
   }
