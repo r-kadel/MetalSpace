@@ -1,21 +1,17 @@
-.add-comment {
-    font-size: .8rem;
-    display: flex;
-    flex-direction: column;
-    padding: .5em;
-    align-items: flex-start;
-  }
-  
-.add-comment-textarea {
-    width: 100%;
+.comment {
+  width: 80%;
+  border: 1px solid grey;
+  padding: 1em;
+  min-height: 100px;
+  margin-top: 1em;
 }
 
-.add-comment-btn {
-    width: 100px;
-    margin-top: .5em;
-    align-self: center;
+.post-time {
+  margin: .5em 0;
+  display: flex;
+  justify-content: flex-end;
 }
-  
-.add-comment-btn:hover {
-    background-color: #7CC6FE;
+
+.like-btn {
+  margin-top: .6em;
 }

@@ -4,10 +4,9 @@ import { Switch, Route } from 'react-router-dom';
 import Header from '../Header/Header';
 import Footer from '../Footer/Footer';
 
-import Landing from '../../Pages/Landing/Landing'
-import Signup from '../../Pages/Signup/Signup'
-import Home from '../../Pages/Home/Home'
-import Upload from '../Upload/Upload';
+import Landing from '../../Pages/Landing/Landing';
+import Signup from '../../Pages/Signup/Signup';
+import Home from '../../Pages/Home/Home';
 
 function App() {
   return (
@@ -23,9 +22,6 @@ function App() {
         </Route>
         <Route path="/home">
           <Home />
-        </Route>
-        <Route path="/upload">
-          <Upload />
         </Route>
       </Switch>
 

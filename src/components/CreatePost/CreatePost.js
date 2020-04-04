@@ -27,7 +27,8 @@ function CreatePost() {
         }}
         rows="5"
         className="create-post-textarea"
-        placeholder="Post something heavy"></textarea>
+        placeholder="Post something heavy"
+        required></textarea>
       <button className="post-btn" type="submit">
         Post!
       </button>

@@ -1,40 +1,29 @@
-import React, { useState, useContext } from 'react';
-import { Context } from '../../Context/Context';
+import React, { useState } from 'react';
 import './Comment.css';
 
+function Comment(props) {
 
-function Comment() {
-  const [comment, setComment] = useState('');
-  const { setUserComments, setShowComment } = useContext(Context);
+  const [liked, setLiked] = useState(false);
 
-  function handleCommentSubmit(e) {
-    e.preventDefault();
-    e.target.reset()
-    setUserComments(comment);
-    setComment('')
-  }
-
-  function cancel() {
-    setShowComment(false);
+  function like() {
+    setLiked(!liked);
   }
 
   return (
-    <form onSubmit={handleCommentSubmit} className="add-comment">
-    <textarea
-      onChange={e => {
-        setComment(e.target.value);
-      }}
-      rows="5"
-      className="add-comment-textarea"
-      placeholder="Add a comment..."></textarea>
-    <button className="add-comment-btn" type="submit">
-      Add Comment
-    </button>
-    <button onClick={cancel} className="cancel-btn" >
-      Cancel
-    </button>
-  </form>
-  )
+    <article className="comment">
+      <p>{props.content}</p>
+      <div className="post-time">Posted: Today</div>
+      {liked ? (
+          <button onClick={like} className="like-btn liked">
+            Like
+          </button>
+        ) : (
+          <button onClick={like} className="like-btn">
+            Like
+          </button>
+        )}
+    </article>
+  );
 }
 
-export default Comment
+export default Comment;

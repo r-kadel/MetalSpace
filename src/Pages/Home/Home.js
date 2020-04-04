@@ -13,8 +13,9 @@ import UserProfile from '../../components/UserProfile/UserProfile';
 function Home() {
   const { userPosts } = useContext(Context);
 
+  //sort by createdAt
   const allPosts = userPosts.map((post, i) => {
-    return <Post content={post.postContent} key={i} />;
+    return <Post content={post.postContent} key={i} id={post.id} />;
   });
 
   // cog if needed later
