@@ -1,5 +1,4 @@
 .upload-modal {
-  /* display: none; */
   position: fixed;
   z-index: 1;
   left: 0;
@@ -12,19 +11,27 @@
 
 .upload-container {
   opacity: 1;
+  background-color: white;
   margin: 10% auto;
   height: 60%;
   width: 60%;
   box-shadow: 0 5px 8px 0 rgba(0, 0, 0, 0.2), 0 7px 20px 0 rgba(0, 0, 0, 0.17);
   animation-name: uploadopen;
   animation-duration: 1s;
+  text-align: center;
 }
 
 .close-btn {
   color: #ccc;
   float: right;
   font-size: 30px;
-  color: #fff;
+  color: grey;
+}
+
+.upload-form {
+  margin: 1em auto;
+  height: 75%;
+  width: 75%;
 }
 
 .close-btn:hover,
@@ -34,7 +41,29 @@
   cursor: pointer;
 }
 
+.drop-box {
+  margin: 0 auto;
+  border: 1px dashed black;
+  height: 75%;
+  width: 75%;
+}
 
+.file-drop {
+  height: 100%;
+  width: 100%;
+}
+
+.file-drop > .file-drop-target {
+  height: 100%;
+}
+
+.file-drop > .file-drop-target.file-drop-dragging-over-frame {
+  background-color: silver;
+}
+.file-drop > .file-drop-target.file-drop-dragging-over-target {
+  color: #ff6e40;
+  box-shadow: 0 0 13px 3px #ff6e40;
+}
 
 @keyframes uploadopen {
   from {

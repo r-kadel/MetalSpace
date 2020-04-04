@@ -1,23 +1,29 @@
-import React, { useContext } from 'react';
-import { Context } from '../../Context/Context';
-import './UploadModal.css';
+import React, { useContext } from "react"
+import { Context } from "../../Context/Context"
+import { FileDrop } from "react-file-drop"
+import "./UploadModal.css"
 
 function UploadModal() {
-  const { setShowUpload } = useContext(Context);
+  const { setShowUpload, setProfilePic } = useContext(Context)
 
   function closeUploadModal() {
-    setShowUpload(false);
+    setShowUpload(false)
   }
 
   function outsideClick(e) {
     e.persist()
-    if(e.target.className === 'upload-modal') {
-      setShowUpload(false);
+    if (e.target.className === "upload-modal") {
+      setShowUpload(false)
     }
   }
 
+  function handleDrop(newPic) {
+    console.log(newPic[0])
+    setProfilePic(newPic);
+  }
+
   return (
-    <div onClick={e => outsideClick(e)} className="upload-modal">
+    <div onClick={(e) => outsideClick(e)} className="upload-modal">
       <div className="upload-container">
         <header className="upload-header">
           <span onClick={closeUploadModal} className="close-btn">
@@ -26,17 +32,22 @@ function UploadModal() {
           <h2>Upload a picture</h2>
         </header>
         <form className="upload-form">
-          <label htmlFor="profile-pic">Select image:</label>
+          <div className="drop-box">
+            <FileDrop
+              onDrop={(file) => handleDrop(file)}
+              onDragOver={e => console.log('dragover', e )}
+              > Drag and drop a picture here </FileDrop>
+          </div>
           <input
             type="file"
             name="profile-pic"
-            accept="image/png, image/jpeg"
+            accept="image/png, image/jpeg, image/jpg"
           />
           <button type="submit">Upload</button>
         </form>
       </div>
     </div>
-  );
+  )
 }
 
-export default UploadModal;
+export default UploadModal

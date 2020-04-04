@@ -6,7 +6,7 @@ import './Post.css';
 
 function Post(props) {
   const [liked, setLiked] = useState(false);
-  const { showComment, setShowComment, userComments } = useContext(Context);
+  const { userComments, showComment, setShowComment } = useContext(Context);
 
   function like() {
     setLiked(!liked);
