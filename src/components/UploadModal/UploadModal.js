@@ -35,7 +35,7 @@ function UploadModal() {
           <div className="drop-box">
             <FileDrop
               onDrop={(file) => handleDrop(file)}
-              onDragOver={e => console.log('dragover', e )}
+              onDragOver={ hover }
               > Drag and drop a picture here </FileDrop>
           </div>
           <input
