@@ -7,8 +7,6 @@ import pic from '../../assets/stockuser.png';
 function UserProfile() {
   const { showUpload, setShowUpload } = useContext(Context);
 
-  function outsideClick(e) {}
-
   function closeUploadModal() {
     setShowUpload(false);
   }
