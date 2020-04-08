@@ -3,6 +3,7 @@ import { Switch, Route } from 'react-router-dom';
 
 import Header from '../Header/Header';
 import Footer from '../Footer/Footer';
+import PrivateRoute from '../PrivateRoute/PrivateRoute';
 
 import Landing from '../../Pages/Landing/Landing';
 import Signup from '../../Pages/Signup/Signup';
@@ -20,9 +21,7 @@ function App() {
         <Route path="/signup">
           <Signup />
         </Route>
-        <Route path="/home">
-          <Home />
-        </Route>
+        <PrivateRoute path="/home" component={Home} />
       </Switch>
 
       <Footer />

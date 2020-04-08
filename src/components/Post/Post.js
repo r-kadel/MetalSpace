@@ -28,7 +28,7 @@ function Post(props) {
     <>
       <article className="post">
         <p>{props.content}</p>
-        <div className="post-time">Posted: Today</div>
+        <div className="post-time">{props.createdAt}</div>
         <hr />
         <div className="post-interactions">
           {liked ? (

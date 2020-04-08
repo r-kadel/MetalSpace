@@ -1,7 +1,9 @@
-import React, { useContext } from 'react';
-import { Link } from 'react-router-dom';
+import React, { useContext, useEffect } from 'react';
+import { Link, useHistory } from 'react-router-dom';
 import { Context } from '../../Context/Context';
 import './Landing.css';
+
+import TokenService from '../../services/token-service';
 
 function Landing() {
   const {
@@ -12,6 +14,7 @@ function Landing() {
     showLogin,
     setShowLogin
   } = useContext(Context);
+  const history = useHistory();
 
   //User must log in to view the page
   function handleSignInButtonClick() {
@@ -23,6 +26,15 @@ function Landing() {
       setLoggedIn(true);
     }
   }
+
+  useEffect(() => {
+    if (TokenService.hasAuthToken()) {
+      setLoggedIn(true);
+    } else {
+      history.push('/');
+    }
+  }, [history, setLoggedIn]);
+
 
   return (
     <main className="container">

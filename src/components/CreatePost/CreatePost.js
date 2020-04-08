@@ -5,18 +5,13 @@ import './CreatePost.css';
 function CreatePost() {
   const [post, setPost] = useState('');
 
-  const { setUserPosts } = useContext(Context);
+  const { createNewPost } = useContext(Context);
 
   function handlePostSubmit(e) {
     e.preventDefault();
     e.target.reset()
     setPost('')
     createNewPost(post);
-  }
-
-  function createNewPost(newPost) {
-    const postToAdd = {postContent: newPost}
-    setUserPosts(prevPosts => [...prevPosts, postToAdd] )
   }
 
   return (

@@ -5,7 +5,7 @@ import Login from '../Login/Login';
 import './Header.css';
 
 function Header() {
-  const { setLoggedIn, loggedIn, showLogin, setShowLogin } = useContext(
+  const { loggedIn, showLogin, setShowLogin, logOut } = useContext(
     Context
   );
 
@@ -14,7 +14,7 @@ function Header() {
   }
 
   function handleLogOut() {
-    setLoggedIn(false);
+    logOut();
   }
 
   return (
