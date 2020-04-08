@@ -21,7 +21,6 @@ function Home() {
 
   useEffect(() => {
     onPageLoadCallback();
-    console.log('use effect')
   }, [onPageLoadCallback]);
 
   return (

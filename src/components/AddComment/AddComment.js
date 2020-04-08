@@ -4,19 +4,16 @@ import './AddComment.css';
 
 function AddComment(props) {
   const [comment, setComment] = useState('');
-  const { setUserComments, setShowComment } = useContext(Context);
+  const { setShowComment, createNewComment } = useContext(Context);
 
   function handleCommentSubmit(e) {
+    const commentToAdd = { content: comment, postId: props.postId.toString() };
+
     e.preventDefault();
     e.target.reset();
-    createComment(comment);
+    createNewComment(commentToAdd);
     setComment('');
     setShowComment('');
-  }
-
-  function createComment(newComment) {
-    const commentToAdd = { content: newComment, postId: props.postId };
-    setUserComments(prevComments => [...prevComments, commentToAdd]);
   }
 
   function cancel() {
@@ -26,7 +23,7 @@ function AddComment(props) {
   return (
     <form onSubmit={handleCommentSubmit} className="add-comment">
       <textarea
-        onChange={e => {
+        onChange={(e) => {
           setComment(e.target.value);
         }}
         rows="5"

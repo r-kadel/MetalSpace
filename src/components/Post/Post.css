@@ -9,15 +9,18 @@
 .post-time {
   margin: .5em 0;
   display: flex;
-  justify-content: flex-end;
+  flex-direction: column;
+  align-items: flex-end;
 }
 
 .post-interactions {
   display: flex;
   justify-content: space-around;
   margin-top: .5em;
+  line-height: .2em;
 }
 
 .liked {
   background-color: aqua;
 }
+
