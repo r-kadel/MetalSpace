@@ -4,10 +4,11 @@ import { Context } from '../../Context/Context';
 import UploadModal from '../UploadModal/UploadModal';
 
 function UserProfile() {
-  const { showUpload, setShowUpload, profilePic } = useContext(Context);
+  const { showUpload, setShowUpload, profilePic, userData } = useContext(Context);
 
   function openUploadModal() {
     setShowUpload(true);
+    console.log(userData)
   }
 
   return (

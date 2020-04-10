@@ -4,7 +4,9 @@ import './Login.css';
 import { Context } from '../../Context/Context';
 
 function Login() {
-  const { setLoggedIn, logIn, setHasError } = useContext(Context);
+  const { setLoggedIn, logIn, setHasError } = useContext(
+    Context
+  );
   const history = useHistory();
 
   function handleSubmit(e) {
@@ -12,7 +14,7 @@ function Login() {
     const { email, password } = e.target;
     const credentials = {
       email: email.value,
-      password: password.value
+      password: password.value,
     };
     //Send user creds to logIn func in context for validation, then runs
     //this arrow func as the callback to push to the home page
@@ -26,13 +28,15 @@ function Login() {
   }
 
   return (
-    <form className="login-form" onSubmit={handleSubmit}>
-      <label htmlFor="username">Email:</label>
-      <input name="email" type="text" required />
-      <label htmlFor="password">Password:</label>
-      <input name="password" type="password" required />
-      <button className="login-submit">Submit</button>
-    </form>
+    <>
+      <form className="login-form" onSubmit={handleSubmit}>
+        <label htmlFor="username">Email:</label>
+        <input name="email" type="text" required />
+        <label htmlFor="password">Password:</label>
+        <input name="password" type="password" required />
+        <button className="login-submit">Submit</button>
+      </form>
+    </>
   );
 }
 

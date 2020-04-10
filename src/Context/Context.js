@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import config from '../config';
 import TokenService from '../services/token-service';
+import UserService from '../services/user-service';
 import pic from '../assets/stockuser.png';
 
 const Context = React.createContext();
@@ -64,7 +65,6 @@ function ContextProvider(props) {
         setUserComments(resJson);
       })
       .catch((err) => setErrorMessage(err.error));
-
   }
 
   function logIn(credentials, cb) {
@@ -80,8 +80,9 @@ function ContextProvider(props) {
         !res.ok
           ? res.json().then((e) => Promise.reject(e))
           : res.json().then((res) => {
-              setUserData(res.userData);
               TokenService.saveAuthToken(res.authToken);
+              UserService.saveUserId(res.userData.id);
+              setUserData(res.userData);
               setLoggedIn(true);
               cb();
             })
@@ -97,15 +98,20 @@ function ContextProvider(props) {
 
   function logOut() {
     TokenService.clearAuthToken();
+    UserService.clearUserId();
     setLoggedIn(false);
   }
 
-  async function onPageLoad() {
+  function onPageLoad() {
     if (TokenService.hasAuthToken()) {
       //Need to pull the user data on a refresh after confirming token
+      UserService.getUserId();
+      getUserData(UserService.getUserId());
       setLoggedIn(true);
       getPosts();
       getComments();
+    } else {
+      setLoggedIn(false);
     }
   }
 
@@ -122,7 +128,7 @@ function ContextProvider(props) {
         !res.ok
           ? res.json().then((e) => Promise.reject(e))
           : res.json().then((res) => {
-              console.log(res);
+              setUserPosts((prevPosts) => [res, ...prevPosts]);
             })
       )
       .catch((err) => {
@@ -134,11 +140,6 @@ function ContextProvider(props) {
   }
 
   function createNewComment(newComment) {
-    console.log( JSON.stringify({
-      content: newComment.content,
-      user_id: userData.id,
-      post_id: newComment.postId,
-    }));
     fetch(`${BASE_URL}/comments`, {
       method: 'POST',
       headers: {
@@ -150,6 +151,45 @@ function ContextProvider(props) {
         user_id: userData.id,
         post_id: newComment.postId,
       }),
+    })
+      .then((res) =>
+        !res.ok
+          ? res.json().then((e) => Promise.reject(e))
+          : res.json().then((res) => {
+              setUserComments((prevComments) => [res, ...prevComments]);
+            })
+      )
+      .catch((err) => {
+        setHasError(true);
+        console.log(err);
+        setErrorMessage(err.error, 'post error');
+      });
+    setErrorMessage('');
+  }
+
+  function getUserData(userId) {
+    fetch(`${BASE_URL}/users/${userId}`, {
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `bearer ${TokenService.getAuthToken()}`,
+      },
+    }).then((res) =>
+      !res.ok
+        ? res.json().then((e) => Promise.reject(e))
+        : res.json().then((res) => {
+            setUserData(res);
+          })
+    );
+  }
+
+  function uploadPic(img) {
+    fetch(`${BASE_URL}/users/${userData.id}`, {
+      method: 'PATCH',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `bearer ${TokenService.getAuthToken()}`,
+      },
+      body: JSON.stringify({ profile_image: img }),
     })
       .then((res) =>
         !res.ok
@@ -193,7 +233,9 @@ function ContextProvider(props) {
         onPageLoad,
         createNewPost,
         createNewComment,
-        getComments
+        getComments,
+        uploadPic,
+        userData
       }}>
       {props.children}
     </Context.Provider>

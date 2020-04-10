@@ -6,9 +6,7 @@ import './Post.css';
 
 function Post(props) {
   const [liked, setLiked] = useState(false);
-  const { userComments, showComment, setShowComment, getComments } = useContext(
-    Context
-  );
+  const { userComments, showComment, setShowComment } = useContext(Context);
 
   function like() {
     setLiked(!liked);
@@ -20,9 +18,8 @@ function Post(props) {
 
   const postedComments = () =>
     userComments
-      .filter((comment) => comment.postId === props.id)
+      .filter((comment) => comment.id === props.id)
       .map((filteredComment) => {
-        console.log(filteredComment);
         return (
           <Comment key={filteredComment.id} content={filteredComment.content} />
         );
