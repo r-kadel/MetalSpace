@@ -183,21 +183,15 @@ function ContextProvider(props) {
   }
 
   function uploadPic(img) {
+    console.log(img.split(',')[1])
     fetch(`${BASE_URL}/users/${userData.id}`, {
       method: 'PATCH',
       headers: {
         'Content-Type': 'application/json',
         Authorization: `bearer ${TokenService.getAuthToken()}`,
       },
-      body: JSON.stringify({ profile_image: img }),
+      body: JSON.stringify({ profile_image: img.split(',')[1] }),
     })
-      .then((res) =>
-        !res.ok
-          ? res.json().then((e) => Promise.reject(e))
-          : res.json().then((res) => {
-              console.log(res);
-            })
-      )
       .catch((err) => {
         setHasError(true);
         console.log(err);
@@ -235,7 +229,7 @@ function ContextProvider(props) {
         createNewComment,
         getComments,
         uploadPic,
-        userData
+        userData,
       }}>
       {props.children}
     </Context.Provider>

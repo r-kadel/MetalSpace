@@ -4,11 +4,37 @@ import { Context } from '../../Context/Context';
 import UploadModal from '../UploadModal/UploadModal';
 
 function UserProfile() {
-  const { showUpload, setShowUpload, profilePic, userData } = useContext(Context);
+  const {
+    showUpload,
+    setShowUpload,
+    profilePic,
+    setProfilePic,
+    userData,
+  } = useContext(Context);
 
   function openUploadModal() {
     setShowUpload(true);
-    console.log(userData)
+  }
+
+  function show() {
+    var uint8array = new TextEncoder("utf-8").encode("¢");
+    console.log(new TextDecoder("utf-8").decode(uint8array))
+    console.log(userData.profile_image)
+    // console.log(
+    //   'data:image/png;charset=utf-8;base64,' +
+    //     btoa(
+    //       String.fromCharCode.apply(
+    //         null,
+    //         new Uint8Array(userData.profile_image.data)
+    //       )
+    //     )
+    // );
+
+    // let base64 = userData.profile_image.data;
+    // let buffer = Uint8Array.from(atob(base64), (c) => c.charCodeAt(0));
+    // let blob = new Blob([buffer], { type: 'image/png' });
+    // let url = URL.createObjectURL(blob);
+    // setProfilePic(url);
   }
 
   return (
@@ -18,6 +44,9 @@ function UserProfile() {
         <div className="pic-buttons">
           <button onClick={openUploadModal} className="pic-edit-btn">
             Edit
+          </button>
+          <button onClick={show} className="pic-edit-btn">
+            test
           </button>
         </div>
         {showUpload && <UploadModal />}
