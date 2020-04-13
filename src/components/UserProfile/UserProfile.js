@@ -13,7 +13,6 @@ function UserProfile() {
 
   function openUploadModal() {
     setShowUpload(true);
-    console.log(userData)
   }
 
   return (

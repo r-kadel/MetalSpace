@@ -5,7 +5,8 @@ import UserService from '../services/user-service';
 import pic from '../assets/stockuser.png';
 
 const Context = React.createContext();
-const BASE_URL = 'http://localhost:8000/api';
+// const BASE_URL = 'http://localhost:8000/api';
+const BASE_URL = 'https://still-wave-10274.herokuapp.com/api';
 
 function ContextProvider(props) {
   const [userPosts, setUserPosts] = useState([]);
