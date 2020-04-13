@@ -102,7 +102,7 @@ function ContextProvider(props) {
     setLoggedIn(false);
   }
 
-  function onPageLoad() {
+  async function onPageLoad() {
     if (TokenService.hasAuthToken()) {
       //Need to pull the user data on a refresh after confirming token
       UserService.getUserId();
@@ -178,26 +178,30 @@ function ContextProvider(props) {
         ? res.json().then((e) => Promise.reject(e))
         : res.json().then((res) => {
             setUserData(res);
+            if (!res.image_url) {
+              setProfilePic(pic);
+            } else {
+              setProfilePic(res.image_url);
+            }
           })
     );
   }
 
-  function uploadPic(img) {
-    console.log(img.split(',')[1])
+  function sendImageUrlToServer(url) {
     fetch(`${BASE_URL}/users/${userData.id}`, {
       method: 'PATCH',
       headers: {
         'Content-Type': 'application/json',
         Authorization: `bearer ${TokenService.getAuthToken()}`,
       },
-      body: JSON.stringify({ profile_image: img.split(',')[1] }),
-    })
-      .catch((err) => {
-        setHasError(true);
-        console.log(err);
-        setErrorMessage(err.error, 'post error');
-      });
+      body: JSON.stringify({ image_url: url }),
+    }).catch((err) => {
+      setHasError(true);
+      console.log(err);
+      setErrorMessage(err.error, 'post error');
+    });
     setErrorMessage('');
+    setProfilePic(url);
   }
 
   return (
@@ -220,7 +224,6 @@ function ContextProvider(props) {
         showComment,
         setShowComment,
         profilePic,
-        setProfilePic,
         register,
         logIn,
         logOut,
@@ -228,7 +231,7 @@ function ContextProvider(props) {
         createNewPost,
         createNewComment,
         getComments,
-        uploadPic,
+        sendImageUrlToServer,
         userData,
       }}>
       {props.children}

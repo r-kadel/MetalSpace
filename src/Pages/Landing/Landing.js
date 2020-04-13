@@ -12,7 +12,7 @@ function Landing() {
     setHasError,
     setErrorMessage,
     showLogin,
-    setShowLogin
+    setShowLogin,
   } = useContext(Context);
   const history = useHistory();
 
@@ -35,7 +35,6 @@ function Landing() {
     }
   }, [history, setLoggedIn]);
 
-
   return (
     <main className="container">
       <div className="landing-page">
@@ -46,9 +45,13 @@ function Landing() {
         </p>
         <ul className="setup-ul">
           <li>
-            Sign in or Sign up to start sharing. The server is not set up yet so
-            any email and password will allow you to log in.
+            Sign in or Sign up to start sharing. There is currently a demo
+            account set up to play around with, or you can create your own! We
+            are still in the development phase so any accounts created are
+            subject to change or deletion.
           </li>
+          <li>Email Address: fakemail@yahoo.com</li>
+          <li>Password: 1234</li>
         </ul>
         <button
           className="landing-page-signin"
