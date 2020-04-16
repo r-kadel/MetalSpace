@@ -2,11 +2,18 @@ import React, { useState, useContext } from 'react';
 import { Context } from '../../Context/Context';
 import AddComment from '../AddComment/AddComment';
 import Comment from '../Comment/Comment';
-import './Post.css';
+import './Rant.css';
 
-function Post(props) {
+function Rant(props) {
   const [liked, setLiked] = useState(false);
-  const { userComments, showComment, setShowComment } = useContext(Context);
+  const {
+    userComments,
+    showComment,
+    setShowComment,
+    deletePost,
+    pageData,
+    userData,
+  } = useContext(Context);
 
   function like() {
     setLiked(!liked);
@@ -14,21 +21,32 @@ function Post(props) {
 
   function handleComment() {
     setShowComment(props.id);
+    console.log(pageData.id, userData.id)
   }
 
+  function handleDelete() {
+    deletePost(props.id);
+  }
+  //sort comments to their appropriate posts
   const postedComments = () =>
     userComments
-      .filter((comment) => comment.id === props.id)
+      .filter((comment) => comment.postId === props.id)
       .map((filteredComment) => {
         return (
-          <Comment key={filteredComment.id} content={filteredComment.content} />
+          <Comment
+            id={filteredComment.id}
+            key={filteredComment.id}
+            content={filteredComment.content}
+            date={filteredComment.date_created}
+            user={filteredComment.user}
+          />
         );
       });
 
   const date = Date.parse(props.createdAt);
   return (
     <>
-      <article className="post">
+      <article className="rant">
         <p>{props.content}</p>
         <div className="post-time">
           <span className="date">
@@ -47,7 +65,7 @@ function Post(props) {
           </span>
         </div>
         <hr />
-        <div className="post-interactions">
+        <div className="rant-interactions">
           {liked ? (
             <button onClick={like} className="liked">
               Like
@@ -60,6 +78,13 @@ function Post(props) {
             className="comment-btn comment-active">
             Comment
           </button>
+          {pageData.id === userData.id ? (
+            <button
+              onClick={handleDelete}
+              className="comment-btn comment-active">
+              Delete
+            </button>
+          ) : null}
         </div>
         {showComment === props.id && <AddComment postId={props.id} />}
       </article>
@@ -68,4 +93,4 @@ function Post(props) {
   );
 }
 
-export default Post;
+export default Rant;

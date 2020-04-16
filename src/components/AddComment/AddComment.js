@@ -8,7 +8,6 @@ function AddComment(props) {
 
   function handleCommentSubmit(e) {
     const commentToAdd = { content: comment, postId: props.postId.toString() };
-
     e.preventDefault();
     e.target.reset();
     createNewComment(commentToAdd);

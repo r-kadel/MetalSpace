@@ -7,16 +7,7 @@
   margin-bottom: 2em;
 }
 
-.personal-section {
-  border: 1px solid grey;
-  margin-top: 1em;
-  width: 80%;
-  display: flex;
-  justify-content: space-around;
-  align-items: center;
-}
-
-.post-section {
+.rant-section {
   margin-top: 1em;
   width: 80%;
   display: flex;

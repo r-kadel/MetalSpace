@@ -5,11 +5,12 @@ import UserService from '../services/user-service';
 import pic from '../assets/stockuser.png';
 
 const Context = React.createContext();
-// const BASE_URL = 'http://localhost:8000/api';
-const BASE_URL = 'https://still-wave-10274.herokuapp.com/api';
+// change to local for development, dont forget the url in search!
+const BASE_URL = 'http://localhost:8000/api';
+// const BASE_URL = 'https://still-wave-10274.herokuapp.com/api';
 
 function ContextProvider(props) {
-  const [userPosts, setUserPosts] = useState([]);
+  const [userRants, setUserRants] = useState([]);
   const [loggedIn, setLoggedIn] = useState(false);
   const [hasError, setHasError] = useState(false);
   const [errorMessage, setErrorMessage] = useState('');
@@ -19,6 +20,8 @@ function ContextProvider(props) {
   const [showComment, setShowComment] = useState('');
   const [profilePic, setProfilePic] = useState(pic);
   const [userData, setUserData] = useState({});
+  const [pageData, setPageData] = useState({});
+  const [showEdit, setShowEdit] = useState(false);
 
   function register(userInfo) {
     fetch(`${BASE_URL}/users`, {
@@ -38,7 +41,7 @@ function ContextProvider(props) {
       });
   }
 
-  function getPosts() {
+  function getRants() {
     fetch(`${BASE_URL}/posts/`, {
       method: 'GET',
       headers: {
@@ -48,7 +51,7 @@ function ContextProvider(props) {
     })
       .then((res) => res.json())
       .then((resJson) => {
-        setUserPosts(resJson);
+        setUserRants(resJson);
       })
       .catch((err) => setErrorMessage(err.error));
   }
@@ -85,7 +88,7 @@ function ContextProvider(props) {
               UserService.saveUserId(res.userData.id);
               setUserData(res.userData);
               setLoggedIn(true);
-              cb();
+              cb(res.userData.id);
             })
       )
       .catch((err) => {
@@ -103,20 +106,31 @@ function ContextProvider(props) {
     setLoggedIn(false);
   }
 
-  async function onPageLoad() {
+  function onPageLoad() {
     if (TokenService.hasAuthToken()) {
       //Need to pull the user data on a refresh after confirming token
       UserService.getUserId();
       getUserData(UserService.getUserId());
       setLoggedIn(true);
-      getPosts();
+      getRants();
       getComments();
     } else {
       setLoggedIn(false);
     }
   }
 
-  function createNewPost(newPost) {
+  function onSearchLoad() {
+    if (TokenService.hasAuthToken()) {
+      //Need to pull the user data on a refresh after confirming token
+      UserService.getUserId();
+      getUserData(UserService.getUserId());
+      setLoggedIn(true);
+    } else {
+      setLoggedIn(false);
+    }
+  }
+
+  function createNewRant(newPost) {
     fetch(`${BASE_URL}/posts`, {
       method: 'POST',
       headers: {
@@ -129,7 +143,7 @@ function ContextProvider(props) {
         !res.ok
           ? res.json().then((e) => Promise.reject(e))
           : res.json().then((res) => {
-              setUserPosts((prevPosts) => [res, ...prevPosts]);
+              setUserRants((prevPosts) => [res, ...prevPosts]);
             })
       )
       .catch((err) => {
@@ -182,7 +196,27 @@ function ContextProvider(props) {
             if (!res.image_url) {
               setProfilePic(pic);
             } else {
-              setProfilePic(res.image_url);
+              setProfilePic(pic);
+            }
+          })
+    );
+  }
+
+  function getPageData(userId) {
+    fetch(`${BASE_URL}/users/${userId}`, {
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `bearer ${TokenService.getAuthToken()}`,
+      },
+    }).then((res) =>
+      !res.ok
+        ? res.json().then((e) => Promise.reject(e))
+        : res.json().then((res) => {
+            setPageData(res);
+            if (!res.image_url) {
+              setProfilePic(pic);
+            } else {
+              setProfilePic(pic);
             }
           })
     );
@@ -205,11 +239,60 @@ function ContextProvider(props) {
     setProfilePic(url);
   }
 
+  function deletePost(postId) {
+    fetch(`${BASE_URL}/posts/${postId}`, {
+      method: 'DELETE',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `bearer ${TokenService.getAuthToken()}`,
+      },
+    }).catch((err) => console.log(err));
+
+    setUserRants((prevPosts) => {
+      return prevPosts.filter((post) => post.id !== postId);
+    });
+  }
+
+  function deleteComment(commentId) {
+    fetch(`${BASE_URL}/comments/${commentId}`, {
+      method: 'DELETE',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `bearer ${TokenService.getAuthToken()}`,
+      },
+    }).catch((err) => console.log(err));
+
+    setUserComments((prevComments) => {
+      return prevComments.filter((comment) => comment.id !== commentId);
+    });
+  }
+
+  function patchUserData(updatedUser) {
+    console.log([updatedUser]);
+    fetch(`${BASE_URL}/users/${userData.id}`, {
+      method: 'PATCH',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `bearer ${TokenService.getAuthToken()}`,
+      },
+      body: JSON.stringify(updatedUser),
+    }).catch((err) => {
+      setHasError(true);
+      console.log(err);
+      setErrorMessage(err.error, 'post error');
+    });
+    setErrorMessage('');
+    setShowEdit(false);
+    setPageData((prevData) => {
+      return { ...prevData, ...updatedUser };
+    });
+  }
+
   return (
     <Context.Provider
       value={{
-        userPosts,
-        setUserPosts,
+        userRants,
+        setUserRants,
         loggedIn,
         setLoggedIn,
         hasError,
@@ -229,11 +312,20 @@ function ContextProvider(props) {
         logIn,
         logOut,
         onPageLoad,
-        createNewPost,
+        createNewRant,
         createNewComment,
         getComments,
         sendImageUrlToServer,
         userData,
+        deletePost,
+        deleteComment,
+        pageData,
+        setPageData,
+        getPageData,
+        onSearchLoad,
+        showEdit,
+        setShowEdit,
+        patchUserData,
       }}>
       {props.children}
     </Context.Provider>

@@ -4,12 +4,14 @@
   background-color: #363732;
   height: 3.25rem;
   align-items: center;
-  color: #F4FAFF;
+  color: #A51C30;
 }
 
 .nav-links {
   list-style-type: none;
   display: inline;
+  margin-left: auto;
+  margin-right: .8em;
 }
 
 .nav-links > li{
@@ -33,14 +35,13 @@
 
 .nav-btn:hover {
   border-bottom: inset;
-  border-color: #7CC6FE;
+  border-color: #95B46A;
   border-width: .2em;
-  color: #7CC6FE;
+  color: #95B46A;
 }
 
-.logo {
-  margin-right: auto;
-  margin-left: .4rem;
+.search-btn {
+  margin-left: 1em;
 }
 
 .logo:hover {
@@ -62,11 +63,3 @@
   opacity: .95;
 }
 
-@media screen and (min-width: 420px) {
-  .logo {
-    margin-left: 2rem;
-  }
-  .nav-links > li {
-    margin-right: 2rem;
-  }
-}

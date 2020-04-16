@@ -1,0 +1,23 @@
+.personal-section {
+  border: 1px solid grey;
+  margin-top: 1em;
+  width: 80%;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.cog-li {
+  position: relative;
+  left: 10px;
+  top: 50px;
+  text-align: right;
+}
+
+.cog-btn {
+  cursor: pointer;
+}
+
+.cog-btn:hover {
+  background-color: aqua;
+}

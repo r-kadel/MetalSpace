@@ -6,7 +6,7 @@
 
 html, body {
   height: 100%;
-  font-size: 1rem;
+  font-size: 1.025rem;
   color: #252A34;
 }
 
@@ -15,3 +15,9 @@ a {
   font-weight: bold;
   color:inherit;
 }
+
+button {
+  cursor: pointer;
+}
+
+/* CECCCC  FDECEF  0F110C 040403 */

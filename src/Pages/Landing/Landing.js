@@ -13,6 +13,7 @@ function Landing() {
     setErrorMessage,
     showLogin,
     setShowLogin,
+    userData
   } = useContext(Context);
   const history = useHistory();
 
@@ -30,10 +31,11 @@ function Landing() {
   useEffect(() => {
     if (TokenService.hasAuthToken()) {
       setLoggedIn(true);
+      history.push(`/userPage/${userData.id}`)
     } else {
       history.push('/');
     }
-  }, [history, setLoggedIn]);
+  }, [history, setLoggedIn, userData.id]);
 
   return (
     <main className="container">

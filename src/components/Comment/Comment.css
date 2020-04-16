@@ -1,6 +1,6 @@
 .comment {
   width: 80%;
-  border: 1px solid grey;
+  border: 2px solid #DE1A1A;
   padding: 1em;
   min-height: 100px;
   margin-top: 1em;
@@ -10,8 +10,25 @@
   margin: .5em 0;
   display: flex;
   justify-content: flex-end;
+  font-size: .8rem;
 }
 
 .like-btn {
   margin-top: .6em;
+}
+
+.profile-thumb {
+  max-width: 30px;
+}
+
+.comment-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.comment-content-box {
+  border: 1px solid grey;
+  min-height: 80px;
+  margin-top: .5em;
 }

@@ -1,36 +1,48 @@
 import React, { useContext, useEffect, useCallback } from 'react';
 import { Context } from '../../Context/Context';
+import { useParams } from 'react-router-dom';
 import './Home.css';
 
-import Post from '../../components/Post/Post';
-import CreatePost from '../../components/CreatePost/CreatePost';
+import Rant from '../../components/Rant/Rant';
+import CreateRant from '../../components/CreateRant/CreateRant';
 import UserProfile from '../../components/UserProfile/UserProfile';
 
 // Work on the picture upload feature
 //comments section
 
 function Home() {
-  const { userPosts, onPageLoad } = useContext(Context);
+  let { activeId } = useParams();
+  const { userRants, onPageLoad, getPageData, userData, pageData } = useContext(Context);
+
+  //only show the rants of the user whos page is active
+  const localRants = userRants.filter(
+    (rant) => rant.user_id.toString() === activeId
+  );
 
   //sort by createdAt
-  const sortedPosts = userPosts.sort(function(a, b) {
-    let dateA = new Date(a.date_created), dateB = new Date(b.date_created);
+  const sortedRants = localRants.sort(function (a, b) {
+    let dateA = new Date(a.date_created),
+      dateB = new Date(b.date_created);
     return dateB - dateA;
-});
+  });
 
-  const allPosts = sortedPosts.map((post, i) => {
+  const allLocalRants = sortedRants.map((rant, i) => {
     return (
-      <Post
-        createdAt={post.date_created}
-        content={post.content}
+      <Rant
+        createdAt={rant.date_created}
+        content={rant.content}
         key={i}
-        id={post.id}
+        id={rant.id}
       />
     );
   });
 
-  const onPageLoadCallback = useCallback(onPageLoad, []);
+  const getPageDataCallback = useCallback(getPageData, []);
+  useEffect(() => {
+    getPageDataCallback(activeId);
+  }, [getPageDataCallback, activeId]);
 
+  const onPageLoadCallback = useCallback(onPageLoad, []);
   useEffect(() => {
     onPageLoadCallback();
   }, [onPageLoadCallback]);
@@ -38,10 +50,10 @@ function Home() {
   return (
     <main className="container">
       <div className="user-page">
-        <UserProfile />
-        <section className="post-section">
-          <CreatePost />
-          {allPosts}
+        <UserProfile profileData={pageData} />
+        <section className="rant-section">
+          {userData.id === pageData.id ? <CreateRant /> : null}
+          {allLocalRants}
         </section>
       </div>
     </main>

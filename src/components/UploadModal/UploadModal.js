@@ -11,15 +11,16 @@ function UploadModal() {
   function closeUploadModal() {
     setShowUpload(false);
   }
-
+  // closes modal if user clicks out of the div
   function outsideClick(e) {
     e.persist();
     if (e.target.className === 'upload-modal') {
       setShowUpload(false);
     }
   }
-
+  // send image data to cloud storage and url to server
   async function uploadImageToCloud(data) {
+    console.log(data);
     try {
       const res = await fetch(`${CLOUDINARY_URL}/image/upload`, {
         method: 'POST',
@@ -28,36 +29,34 @@ function UploadModal() {
       const file = await res.json();
 
       sendImageUrlToServer(file.secure_url);
-    } catch(err) {
+    } catch (err) {
       console.log(err);
     }
-
   }
+  // drag and drop
+  function handleDrop(newPic) {
+    const data = new FormData();
+    const file = newPic[0];
+    const reader = new FileReader();
+    const preview = document.querySelector('.file-drop-target-preview');
+    preview.style.visibility = 'visible';
+    if (file) {
+      reader.readAsDataURL(file);
+      data.append('file', file);
+      data.append('upload_preset', 'metalspace');
+    }
 
-  // function handleDrop(newPic) {
-  //   const data = new FormData()
-  //   const file = newPic[0];
-  //   const reader = new FileReader();
-  //   const preview = document.querySelector('.file-drop-target-preview');
-  //   preview.style.visibility = 'visible';
-
-  //   if (file) {
-  //     reader.readAsDataURL(file);
-  //     data.append('file', file[0])
-  //     data.append('upload_preset', 'metalspace')
-  //   }
-
-  //   reader.addEventListener(
-  //     'load',
-  //     function () {
-  //       preview.src = reader.result;
-  //     },
-  //     false
-  //   );
-
-  //   uploadImage(data)
-  // }
-
+    reader.addEventListener(
+      'load',
+      function () {
+        preview.src = reader.result;
+      },
+      false
+    );
+    setImageData(data);
+    setShowUpload(false);
+  }
+  //file selection
   async function previewFile(e) {
     const files = e.target.files;
     const data = new FormData();
@@ -109,7 +108,7 @@ function UploadModal() {
           />
           <span className="or">or</span>
           <div className="drop-box">
-            <FileDrop onDrop={(file) => console.log(file)}>
+            <FileDrop onDrop={(file) => handleDrop(file)}>
               {' '}
               Drag and drop a picture here
               <img className="file-drop-target-preview" alt="preview" />

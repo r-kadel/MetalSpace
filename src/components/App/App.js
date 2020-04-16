@@ -8,6 +8,7 @@ import PrivateRoute from '../PrivateRoute/PrivateRoute';
 import Landing from '../../Pages/Landing/Landing';
 import Signup from '../../Pages/Signup/Signup';
 import Home from '../../Pages/Home/Home';
+import Search from '../../Pages/Search/Search';
 
 function App() {
   return (
@@ -21,7 +22,12 @@ function App() {
         <Route path="/signup">
           <Signup />
         </Route>
-        <PrivateRoute path="/home" component={Home} />
+        <Route path="/userPage/:activeId">
+          <PrivateRoute component={Home} />
+        </Route>
+        <Route path="/search/">
+          <PrivateRoute component={Search} />
+        </Route>
       </Switch>
 
       <Footer />
