@@ -180,7 +180,7 @@ function ContextProvider(props) {
             if (!res.image_url) {
               setProfilePic(pic);
             } else {
-              setProfilePic(pic);
+              setProfilePic(res.image_url);
             }
           })
     );
@@ -200,7 +200,7 @@ function ContextProvider(props) {
             if (!res.image_url) {
               setProfilePic(pic);
             } else {
-              setProfilePic(pic);
+              setProfilePic(res.image_url);
             }
           })
     );

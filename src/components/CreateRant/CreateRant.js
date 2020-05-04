@@ -13,7 +13,7 @@ function CreateRant() {
     e.target.reset();
     if (rant.trim().length === 0) {
       setHasError(true);
-      setErrorMessage('Please enter post something useful');
+      setErrorMessage('Please post something useful');
       window.scrollTo(0, 0);
     } else {
       setRant('');
@@ -44,7 +44,7 @@ function CreateRant() {
         onMouseLeave={postTipShow}>
         <i className="fas fa-check-square"></i>
         {showPostTip && (
-          <span className="post-tooltip tooltip">Post Comment</span>
+          <span className="post-tooltip tooltip">Make a post</span>
         )}
       </button>
     </form>

@@ -13,7 +13,7 @@
   opacity: 1;
   background-color: white;
   margin: 10% auto;
-  height: 65%;
+  height: 70%;
   width: 60%;
   box-shadow: 0 5px 8px 0 rgba(0, 0, 0, 0.2), 0 7px 20px 0 rgba(0, 0, 0, 0.17);
   animation-name: uploadopen;
@@ -30,7 +30,7 @@
 
 .upload-form {
   margin: 1em auto;
-  height: 75%;
+  height: 65%;
   width: 75%;
 }
 
@@ -50,7 +50,7 @@
 
 .file-drop-target-preview {
   max-height: 70%;
-  margin: 2em auto 0 auto;
+  margin: 0 auto;
   display: block;
   visibility: hidden;
 }
@@ -58,12 +58,13 @@
 input[type='file'] {
   width: 90px;
   color: transparent;
-  margin-bottom: 1em;
+  margin-bottom: .3em;
 }
 
 .or {
   display: block;
-  margin-bottom: 1em;
+  margin-bottom: .3em;
+  color: #DE1A1A;
 }
 
 .upload-btn {

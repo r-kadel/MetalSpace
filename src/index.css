@@ -32,8 +32,17 @@ button {
 }
 
 
-@media screen and (max-width: 350px) {
+@media screen and (min-width: 350px) {
   html, body {
     font-size: 1.025rem;
+  }
+}
+
+@media screen and (min-width: 800px) {
+  html, body {
+    font-size: 1.1rem;
+  }
+  p {
+    font-size: 1rem;
   }
 }

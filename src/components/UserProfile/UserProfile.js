@@ -1,4 +1,4 @@
-import React, { useContext, useState, useEffect } from 'react';
+import React, { useContext, useState } from 'react';
 import { Context } from '../../Context/Context';
 import { Link } from 'react-router-dom';
 import UploadModal from '../UploadModal/UploadModal';
@@ -7,9 +7,9 @@ import './UserProfile.css';
 import pic from '../../assets/stockuser.png';
 
 function UserProfile(props) {
-  const [profileImage, setProfileImage] = useState(pic);
   const [showEditTip, setShowEditTip] = useState(false);
   const [showUploadTip, setShowUploadTip] = useState(false);
+  const defaultPic = pic;
 
   const {
     showUpload,
@@ -17,6 +17,7 @@ function UserProfile(props) {
     userData,
     setShowEdit,
     showEdit,
+    profilePic,
   } = useContext(Context);
 
   function openUploadModal() {
@@ -26,14 +27,6 @@ function UserProfile(props) {
   function openEditModal() {
     setShowEdit(true);
   }
-
-  useEffect(() => {
-    if (!props.profileData.image_url) {
-      setProfileImage(pic);
-    } else {
-      setProfileImage(props.profileData.image_url);
-    }
-  }, [props.profileData.image_url]);
 
   function uploadTipShow() {
     setShowUploadTip((prev) => !prev);
@@ -48,7 +41,7 @@ function UserProfile(props) {
       {props.profileData.id === userData.id ? (
         <>
           <section className="profile-info">
-            <img className="profile-pic" alt="profile" src={profileImage} />
+            <img className="profile-pic" alt="profile" src={profilePic} />
             {showUpload && <UploadModal />}
             <div className="bio-info">
               <ul className="bio-ul">
@@ -103,10 +96,18 @@ function UserProfile(props) {
           </nav>
         </>
       ) : (
-        <>
+        <section className="profile-info">
           <div className="img-box">
             <Link to={`/userPage/${props.profileData.id}`}>
-              <img className="profile-pic" alt="profile" src={profileImage} />
+              <img
+                className="profile-pic"
+                alt="profile"
+                src={
+                  props.profileData.image_url
+                    ? props.profileData.image_url
+                    : defaultPic
+                }
+              />
             </Link>
           </div>
           <div className="bio-info">
@@ -124,7 +125,7 @@ function UserProfile(props) {
               ) : null}
             </ul>
           </div>
-        </>
+        </section>
       )}
     </section>
   );

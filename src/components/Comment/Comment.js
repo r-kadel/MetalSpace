@@ -1,21 +1,28 @@
-import React, { useState, useContext, useEffect } from 'react';
+import React, { useState, useContext, useEffect, useCallback } from 'react';
 import { Link } from 'react-router-dom';
 import { Context } from '../../Context/Context';
 import TokenService from '../../services/token-service';
+import pic from '../../assets/stockuser.png';
 import './Comment.css';
 
 function Comment(props) {
   const [commentUser, setCommentUser] = useState('');
   const [showDeleteTip, setShowDeleteTip] = useState(false);
   const { deleteComment, userData, BASE_URL } = useContext(Context);
+  const defaultPic = pic;
+
+  const getUserDataCallback = useCallback(getUserData, []);
 
   function handleDeleteBtn() {
     deleteComment(props.id);
   }
-  useEffect(() => getUserData(props.user), [props.user]);
+  useEffect(() => getUserDataCallback(props.user), [
+    props.user,
+    getUserDataCallback,
+  ]);
 
   function deleteTipShow() {
-    setShowDeleteTip(prev => !prev)
+    setShowDeleteTip((prev) => !prev);
   }
 
   function getUserData(id) {
@@ -38,7 +45,7 @@ function Comment(props) {
         <div className="author">
           <Link to={`/userPage/${commentUser.id}`}>
             <img
-              src={commentUser.image_url}
+              src={commentUser.image_url ? commentUser.image_url : defaultPic}
               alt={commentUser.username}
               className="profile-thumb"
             />{' '}

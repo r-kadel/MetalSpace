@@ -2,6 +2,7 @@ import React, { useContext, useEffect } from 'react';
 import { Link, useHistory } from 'react-router-dom';
 import { Context } from '../../Context/Context';
 import Error from '../../components/Error/Error';
+import Loading from '../../components/Loading/Loading';
 import './Landing.css';
 
 import TokenService from '../../services/token-service';
@@ -17,6 +18,7 @@ function Landing() {
     userData,
     errorMessage,
     hasError,
+    loading,
   } = useContext(Context);
   const history = useHistory();
 
@@ -45,6 +47,7 @@ function Landing() {
       <div className="landing-page">
         {hasError && <Error message={errorMessage} />}
         <h1 className="welcome">Welcome to MetalSpace</h1>
+        {loading && <Loading />}
         <p className="welcome-p">
           A place for metal heads created by metal heads to share music, videos,
           and opinions on all things heavy metal.

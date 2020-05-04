@@ -2,11 +2,13 @@ import React, { useContext, useState } from 'react';
 import { Context } from '../../Context/Context';
 import AddComment from '../AddComment/AddComment';
 import Comment from '../Comment/Comment';
+import pic from '../../assets/stockuser.png';
 import './Rant.css';
 
 function Rant(props) {
   const [showCommentTip, setShowCommentTip] = useState(false);
   const [showDeleteTip, setShowDeleteTip] = useState(false);
+  const defaultPic = pic;
   const {
     userComments,
     showComment,
@@ -17,7 +19,11 @@ function Rant(props) {
   } = useContext(Context);
 
   function handleComment() {
-    setShowComment(props.id);
+    if (!showComment) {
+      setShowComment(props.id);
+    } else {
+      setShowComment('');
+    }
   }
 
   function handleDelete() {
@@ -55,7 +61,7 @@ function Rant(props) {
         <header className="rant-header">
           <div className="author">
             <img
-              src={pageData.image_url}
+              src={pageData.image_url ? pageData.image_url : defaultPic}
               alt={pageData.username}
               className="profile-thumb"
             />{' '}
