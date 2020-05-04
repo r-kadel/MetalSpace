@@ -6,9 +6,9 @@ import UserProfile from '../../components/UserProfile/UserProfile';
 
 function Search() {
   const [allProfiles, setAllProfiles] = useState([]);
-  const { onSearchLoad, userData, loading, setLoading } = useContext(Context);
-
-  const BASE_URL = 'http://localhost:8000/api';
+  const { onSearchLoad, userData, loading, setLoading, BASE_URL } = useContext(
+    Context
+  );
 
   function getAllUsers() {
     fetch(`${BASE_URL}/users`, {

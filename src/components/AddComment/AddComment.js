@@ -6,7 +6,12 @@ function AddComment(props) {
   const [comment, setComment] = useState('');
   const [showDeleteTip, setShowDeleteTip] = useState(false);
   const [showAddCommentTip, setShowAddCommentTip] = useState(false);
-  const { setShowComment, createNewComment, setHasError, setErrorMessage } = useContext(Context);
+  const {
+    setShowComment,
+    createNewComment,
+    setHasError,
+    setErrorMessage,
+  } = useContext(Context);
 
   function handleCommentSubmit(e) {
     const commentToAdd = { content: comment, postId: props.postId.toString() };
@@ -21,7 +26,7 @@ function AddComment(props) {
       setComment('');
       setShowComment('');
       setHasError(false);
-      setErrorMessage('')
+      setErrorMessage('');
     }
   }
 

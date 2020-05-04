@@ -7,8 +7,7 @@ import './Comment.css';
 function Comment(props) {
   const [commentUser, setCommentUser] = useState('');
   const [showDeleteTip, setShowDeleteTip] = useState(false);
-  const { deleteComment, userData } = useContext(Context);
-  const BASE_URL = 'http://localhost:8000/api';
+  const { deleteComment, userData, BASE_URL } = useContext(Context);
 
   function handleDeleteBtn() {
     deleteComment(props.id);
