@@ -61,11 +61,9 @@ function Home() {
       <div className="user-page">
         {hasError && <Error message={errorMessage} />}
         <UserProfile profileData={pageData} />
-        <section className="rant-section">
-          {userData.id === pageData.id ? <CreateRant /> : null}
-          <div className="divider"></div>
-          {allLocalRants}
-        </section>
+        {userData.id === pageData.id ? <CreateRant /> : null}
+        <div className="divider"></div>
+        <section className="rant-section">{allLocalRants}</section>
       </div>
     </main>
   );

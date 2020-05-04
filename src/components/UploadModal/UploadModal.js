@@ -26,7 +26,7 @@ function UploadModal() {
         body: data,
       });
       const file = await res.json();
-
+      console.log(file)
       sendImageUrlToServer(file.secure_url);
     } catch (err) {
       console.log(err);
@@ -44,7 +44,6 @@ function UploadModal() {
       data.append('file', file);
       data.append('upload_preset', 'metalspace');
     }
-
     reader.addEventListener(
       'load',
       function () {
@@ -53,7 +52,6 @@ function UploadModal() {
       false
     );
     setImageData(data);
-    setShowUpload(false);
   }
   //file selection
   async function previewFile(e) {

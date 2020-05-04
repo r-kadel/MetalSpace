@@ -3,9 +3,8 @@ textarea {
 }
 
 .create-rant {
-  width: 100%;
+  width: 80%;
   min-height: 100px;
-  margin-bottom: 1.3em;
   display: flex;
   flex-direction: column;
   align-items: flex-end;

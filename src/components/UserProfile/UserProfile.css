@@ -1,7 +1,6 @@
 .personal-section {
   border: 3px solid rgba(255, 255, 255, 0.5);
   margin-top: 1em;
-  width: 80%;
   border-radius: 8px;
   padding: 1em;
   background-color: rgba(255, 255, 255, 0.125);
@@ -10,10 +9,6 @@
 .img-box {
   display: flex;
   justify-content: center;
-}
-.profile-pic {
-  max-width: 100px;
-  margin: 0 auto;
 }
 
 .bio-ul {
@@ -36,7 +31,7 @@
 
 .profile-info {
   display: flex;
-  justify-content: space-between;
+  justify-content: space-around;
 }
 
 .cog {
