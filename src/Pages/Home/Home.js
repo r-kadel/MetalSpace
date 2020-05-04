@@ -3,6 +3,7 @@ import { Context } from '../../Context/Context';
 import { useParams } from 'react-router-dom';
 import './Home.css';
 
+import Error from '../../components/Error/Error';
 import Rant from '../../components/Rant/Rant';
 import CreateRant from '../../components/CreateRant/CreateRant';
 import UserProfile from '../../components/UserProfile/UserProfile';
@@ -12,7 +13,15 @@ import UserProfile from '../../components/UserProfile/UserProfile';
 
 function Home() {
   let { activeId } = useParams();
-  const { userRants, onPageLoad, getPageData, userData, pageData } = useContext(Context);
+  const {
+    userRants,
+    onPageLoad,
+    getPageData,
+    userData,
+    pageData,
+    hasError,
+    errorMessage,
+  } = useContext(Context);
 
   //only show the rants of the user whos page is active
   const localRants = userRants.filter(
@@ -50,9 +59,11 @@ function Home() {
   return (
     <main className="container">
       <div className="user-page">
+        {hasError && <Error message={errorMessage} />}
         <UserProfile profileData={pageData} />
         <section className="rant-section">
           {userData.id === pageData.id ? <CreateRant /> : null}
+          <div className="divider"></div>
           {allLocalRants}
         </section>
       </div>

@@ -7,7 +7,10 @@ import './UserProfile.css';
 import pic from '../../assets/stockuser.png';
 
 function UserProfile(props) {
-  const [profileImage, setProfileImage] = useState('');
+  const [profileImage, setProfileImage] = useState(pic);
+  const [showEditTip, setShowEditTip] = useState(false);
+  const [showUploadTip, setShowUploadTip] = useState(false);
+
   const {
     showUpload,
     setShowUpload,
@@ -32,37 +35,72 @@ function UserProfile(props) {
     }
   }, [props.profileData.image_url]);
 
+  function uploadTipShow() {
+    setShowUploadTip((prev) => !prev);
+  }
+
+  function editTipShow() {
+    setShowEditTip((prev) => !prev);
+  }
+
   return (
     <section className="personal-section">
       {props.profileData.id === userData.id ? (
         <>
-          <div className="img-box">
+          <section className="profile-info">
             <img className="profile-pic" alt="profile" src={profileImage} />
-            <div className="pic-buttons">
-              <button onClick={openUploadModal} className="pic-edit-btn">
-                Edit
-              </button>
-            </div>
             {showUpload && <UploadModal />}
-          </div>
+            <div className="bio-info">
+              <ul className="bio-ul">
+                <li className="bio-li">
+                  <span className="page-text">Name: </span>
+                  {props.profileData.username}
+                </li>
+                {props.profileData.location ? (
+                  <li className="bio-li">
+                    <span className="page-text">From: </span>{' '}
+                    {props.profileData.location}
+                  </li>
+                ) : (
+                  <li className="bio-li">
+                    <span className="page-text">From: </span>The Black Gates
+                  </li>
+                )}
+                {props.profileData.favorite_band ? (
+                  <li className="bio-li">
+                    <span className="page-text">Favorite Band: </span>
+                    {props.profileData.favorite_band}
+                  </li>
+                ) : null}
+              </ul>
+              {showEdit && <EditModal />}
+            </div>
+          </section>
 
-          <ul className="bio-info">
-            <li className="bio-li">Name: {props.profileData.username}</li>
-            {props.profileData.location ? (
-              <li className="bio-li">From: {props.profileData.location}</li>
-            ) : (
-              <li className="bio-li">From :The Black Gates</li>
-            )}
-            {props.profileData.favorite_band ? (
-              <li className="bio-li">
-                Favorite Band: {props.profileData.favorite_band}
-              </li>
-            ) : null}
-            <li className="cog-li">
-              <i onClick={openEditModal} className="fas fa-cog cog-btn"></i>
-            </li>
-          </ul>
-          {showEdit && <EditModal />}
+          <nav className="profile-footer">
+            <button
+              onMouseEnter={uploadTipShow}
+              onMouseLeave={uploadTipShow}
+              onClick={openUploadModal}
+              className="pic-edit-btn">
+              <i className="fas fa-edit"></i>
+              {showUploadTip && (
+                <span className="upload-tooltip tooltip">
+                  Edit profile picture
+                </span>
+              )}
+            </button>
+            <button
+              className="cog"
+              onMouseEnter={editTipShow}
+              onMouseLeave={editTipShow}
+              onClick={openEditModal}>
+              {showEditTip && (
+                <span className="edit-tooltip tooltip">Edit Profile Info</span>
+              )}
+              <i className="fas fa-cog cog-btn"></i>
+            </button>
+          </nav>
         </>
       ) : (
         <>
@@ -71,19 +109,21 @@ function UserProfile(props) {
               <img className="profile-pic" alt="profile" src={profileImage} />
             </Link>
           </div>
-          <ul className="bio-info">
-            <li className="bio-li">Name: {props.profileData.username}</li>
-            {props.profileData.location ? (
-              <li className="bio-li">{props.profileData.location}</li>
-            ) : (
-              <li className="bio-li">From: The Black Gates</li>
-            )}
-            {props.profileData.favorite_band ? (
-              <li className="bio-li">
-                Favorite Band: {props.profileData.favorite_band}
-              </li>
-            ) : null}
-          </ul>
+          <div className="bio-info">
+            <ul className="bio-ul">
+              <li className="bio-li">Name: {props.profileData.username}</li>
+              {props.profileData.location ? (
+                <li className="bio-li">From: {props.profileData.location}</li>
+              ) : (
+                <li className="bio-li">From: The Black Gates</li>
+              )}
+              {props.profileData.favorite_band ? (
+                <li className="bio-li">
+                  Favorite Band: {props.profileData.favorite_band}
+                </li>
+              ) : null}
+            </ul>
+          </div>
         </>
       )}
     </section>

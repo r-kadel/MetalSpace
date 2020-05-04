@@ -1,22 +1,23 @@
 import React, { useState, useContext, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import { Context } from '../../Context/Context';
 import TokenService from '../../services/token-service';
 import './Comment.css';
 
 function Comment(props) {
-  const [liked, setLiked] = useState(false);
   const [commentUser, setCommentUser] = useState('');
-  const { deleteComment, pageData, userData } = useContext(Context);
+  const [showDeleteTip, setShowDeleteTip] = useState(false);
+  const { deleteComment, userData } = useContext(Context);
   const BASE_URL = 'http://localhost:8000/api';
-
-  function like() {
-    setLiked(!liked);
-  }
 
   function handleDeleteBtn() {
     deleteComment(props.id);
   }
   useEffect(() => getUserData(props.user), [props.user]);
+
+  function deleteTipShow() {
+    setShowDeleteTip(prev => !prev)
+  }
 
   function getUserData(id) {
     fetch(`${BASE_URL}/users/${id}`, {
@@ -30,23 +31,24 @@ function Comment(props) {
         : res.json().then((res) => setCommentUser(res))
     );
   }
-  console.log(commentUser);
   const date = Date.parse(props.date);
+
   return (
     <article className="comment">
       <header className="comment-header">
         <div className="author">
-          <img
-            src={commentUser.image_url}
-            alt="profile"
-            className="profile-thumb"
-          />{' '}
-          {commentUser.username}
+          <Link to={`/userPage/${commentUser.id}`}>
+            <img
+              src={commentUser.image_url}
+              alt={commentUser.username}
+              className="profile-thumb"
+            />{' '}
+          </Link>
+          <Link to={`/userPage/${commentUser.id}`}>{commentUser.username}</Link>
         </div>
         <div className="post-time">
           {' '}
           <span className="date">
-            Posted{' '}
             {new Intl.DateTimeFormat('en-US', {
               year: 'numeric',
               month: 'long',
@@ -61,27 +63,25 @@ function Comment(props) {
           </span>
         </div>
       </header>
-      <hr />
+
       <div className="comment-content-box">
         <p>{props.content}</p>
       </div>
-    
-      <div className="comment-options">
-        {liked ? (
-          <button onClick={like} className="like-btn liked">
-            Like
+
+      {commentUser.id === userData.id ? (
+        <div className="comment-options">
+          <button
+            onClick={handleDeleteBtn}
+            className="comment-delete-btn"
+            onMouseEnter={deleteTipShow}
+            onMouseLeave={deleteTipShow}>
+            {showDeleteTip && (
+              <span className="delete-tooltip tooltip">Delete Comment</span>
+            )}
+            <i className="far fa-trash-alt"></i>
           </button>
-        ) : (
-          <button onClick={like} className="like-btn">
-            Like
-          </button>
-        )}
-        {pageData.id === userData.id ? (
-          <button onClick={handleDeleteBtn} className="comment-delete-btn">
-            Delete
-          </button>
-        ) : null}
-      </div>
+        </div>
+      ) : null}
     </article>
   );
 }

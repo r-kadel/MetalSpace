@@ -2,9 +2,12 @@
   width: 100%;
   border: 2.5px solid #95B46A;
   padding: 1em;
+  padding-top: .3em;
+  padding-bottom: .3em;
   min-height: 100px;
   margin-top: 1em;
   border-radius: 8px;
+  background-color: rgba(255, 255, 255, .125);
 }
 
 .post-time {
@@ -14,17 +17,71 @@
   align-items: flex-end;
 }
 
+.rant-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.rant-content-box {
+  border: 1px solid grey;
+  background-color: rgba(255, 255, 255, .25);
+  border-radius: 8px;
+  padding: .4em;
+  width: 70%;
+  margin: 0 auto;
+}
+
 .rant-interactions {
   display: flex;
   justify-content: space-around;
   margin-top: .5em;
-  line-height: .2em;
 }
 
-.liked {
-  background-color: #92140C;
+.comment-btn-delete {
+  border: none;
+  color: #DE1A1A;
+  font-size: 1.2rem;
+  background: none;
+  padding: .2em;
 }
 
-hr {
-  background-color: #92140C;
+.comment-btn-add {
+  border: none;
+  color: #95B46A;
+  font-size: 1.2rem;
+  background: none;
+  padding: .2em;
+}
+
+.comment-btn-delete:hover,
+.comment-btn-delete:focus {
+ filter: brightness(250%);
+}
+
+.comment-btn-add:hover,
+.comment-btn-add:focus{
+  filter: brightness(150%);
+}
+
+.delete-tooltip {
+  position: relative;
+  bottom: 5px;
+  right: 5px;
+  border-radius: 20px;
+  padding: 0.4em;
+  font-weight: 100;
+  color: #DE1A1A;
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+.comment-tooltip {
+  position: relative;
+  bottom: 5px;
+  left: 5px;
+  border-radius: 20px;
+  padding: 0.4em;
+  font-weight: 100;
+  color: #95b46a;
+  background-color: rgba(255, 255, 255, 0.01);
 }

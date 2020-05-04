@@ -16,7 +16,6 @@
 }
 
 .setup-ul {
-  margin-top: 2em;
   list-style-type: none;
   padding: 0;
   text-align: left;
@@ -29,6 +28,9 @@
   width: 90px;
   font-size: 1.125rem;
   font-weight: bold;
+  color: #95B46A;
+  background: none;
+  border: none;
 }
 
 .landing-page-signup {
@@ -36,9 +38,17 @@
   border-radius: 3px;
   width: 90px;
   font-size: 1.125rem;
+  color: #95B46A;
+  background: none;
+  border: none;
 }
 
 .landing-page-signin:hover, .landing-page-signup:hover {
-  background-color: #A51C30;
-  color: #FDECEF;
+  color: #95B46A;
+  background: none;
+  border: 2px solid #95B46A;
+}
+
+.welcome-p {
+  padding: 2em;
 }

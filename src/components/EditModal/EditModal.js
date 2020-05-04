@@ -1,5 +1,6 @@
 import React, { useContext } from 'react';
 import { Context } from '../../Context/Context';
+import Error from '../Error/Error';
 import './EditModal.css';
 
 function EditModal() {
@@ -9,6 +10,8 @@ function EditModal() {
     patchUserData,
     setHasError,
     setErrorMessage,
+    hasError,
+    errorMessage,
   } = useContext(Context);
 
   function outsideClick(e) {
@@ -57,6 +60,7 @@ function EditModal() {
           </span>
           <h2>Edit your profile</h2>
         </header>
+        {hasError && <Error message={errorMessage} />}
         <form onSubmit={handleSubmit} className="edit-form">
           <label htmlFor="username">User Name: </label>
           <input name="username" placeholder={userData.username} type="text" />

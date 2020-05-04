@@ -6,14 +6,13 @@
   height: 100%;
   width: 100%;
   overflow: auto;
-  background-color: rgba(0, 0, 0, 0.5);
+  background-color: rgba(0, 0, 0, 0.75);
 }
 
 .login-container {
-  opacity: 1;
   background-color: white;
   margin: 10% auto;
-  height: 35%;
+  height: 40%;
   width: 60%;
   box-shadow: 0 5px 8px 0 rgba(255, 255, 255, 0.3), 0 7px 20px 0 rgba(255, 255, 255, 0.17);
   animation-name: uploadopen;
@@ -26,7 +25,7 @@
   font-size: 30px;
   color: grey;
   font-weight: bold;
-  margin-right: .4em;
+  margin-right: .3em;
 }
 
 .login-form {
@@ -39,7 +38,8 @@
 
 .login-header {
   display: flex;
-  flex-direction: row-reverse;
+  justify-content: flex-end;
+  align-items: center;
 }
 
 .login-close-btn:hover,
@@ -51,7 +51,7 @@
 
 .login-form > label {
   margin-top: .3em;
-  color: #A51C30;
+  color: #040403;
 }
 
 .login-form > input {
@@ -65,6 +65,11 @@
   align-self: center;
 }
 
-.login-submit:hover {
-  background-color: #7CC6FE;
+.login-submit:hover, .login-submit:focus {
+  background-color: #95B46A;
 } 
+
+.sys-message {
+  display: block;
+}
+

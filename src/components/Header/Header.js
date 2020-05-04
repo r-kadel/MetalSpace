@@ -1,5 +1,5 @@
 import React, { useContext } from 'react';
-import { Link, useLocation } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { Context } from '../../Context/Context';
 import Login from '../Login/Login';
 import './Header.css';
@@ -8,7 +8,6 @@ function Header() {
   const { loggedIn, showLogin, setShowLogin, logOut, userData } = useContext(
     Context
   );
-  const location = useLocation();
   //display the login modal
   function handleLoginBtn() {
     setShowLogin(!showLogin);
@@ -20,13 +19,19 @@ function Header() {
 
   return (
     <nav className="navbar">
-      {location.pathname !== '/search' ? (
+      <div className="profile-nav">
+        <Link to={`/userPage/${userData.id}`}>
+          <img
+            className="nav-thumb"
+            alt={userData.username}
+            src={userData.image_url}
+          />
+        </Link>
+        <Link className="nav-btn" to={`/userPage/${userData.id}`}>{userData.username}</Link>
+      </div>
+      {loggedIn && (
         <button className="search-btn nav-btn">
           <Link to="/search">Search</Link>
-        </button>
-      ) : (
-        <button className="search-btn nav-btn">
-          <Link to={`/userPage/${userData.id}`}>Home</Link>
         </button>
       )}
       <ul className="nav-links">

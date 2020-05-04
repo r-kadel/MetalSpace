@@ -1,11 +1,12 @@
 import React, { useState, useEffect, useContext, useCallback } from 'react';
 import { Context } from '../../Context/Context';
+import Loading from '../../components/Loading/Loading';
 import './Search.css';
 import UserProfile from '../../components/UserProfile/UserProfile';
 
 function Search() {
   const [allProfiles, setAllProfiles] = useState([]);
-  const { onSearchLoad, userData } = useContext(Context);
+  const { onSearchLoad, userData, loading, setLoading } = useContext(Context);
 
   const BASE_URL = 'http://localhost:8000/api';
 
@@ -17,7 +18,10 @@ function Search() {
       },
     })
       .then((res) => res.json())
-      .then((resJson) => setAllProfiles(resJson))
+      .then((resJson) => {
+        setAllProfiles(resJson);
+        setLoading(false);
+      })
       .catch((err) => console.log(err));
   }
 
@@ -28,17 +32,18 @@ function Search() {
     });
 
   const onSearchLoadCallback = useCallback(onSearchLoad, []);
+  const getAllUsersCallback = useCallback(getAllUsers, []);
+
   useEffect(() => {
     onSearchLoadCallback();
-  }, [onSearchLoadCallback]);
+    getAllUsersCallback();
+  }, [onSearchLoadCallback, getAllUsersCallback]);
 
   return (
     <main className="container">
       <div className="search-page">
-        <h1>Search all Users</h1>
-        <button onClick={getAllUsers} className="search-btn">
-          Search
-        </button>
+        <h1 className="search-h1">Search all Users</h1>
+        {loading && <Loading />}
         <section className="search-results">{listProfiles}</section>
       </div>
     </main>

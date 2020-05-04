@@ -1,10 +1,11 @@
 import React, { useContext } from 'react';
 import { useHistory } from 'react-router-dom';
 import './Login.css';
+import Error from '../../components/Error/Error';
 import { Context } from '../../Context/Context';
 
 function Login() {
-  const { setLoggedIn, logIn, setHasError, setShowLogin } = useContext(Context);
+  const { setLoggedIn, logIn, setHasError, setShowLogin, hasError, errorMessage } = useContext(Context);
   const history = useHistory();
 
   function handleSubmit(e) {
@@ -34,6 +35,7 @@ function Login() {
 
   function closeLoginModal() {
     setShowLogin(false);
+    setHasError(false);
   }
 
   return (
@@ -44,6 +46,7 @@ function Login() {
             &times;
           </span>
         </header>
+        <div>{hasError && <Error className="sys-message" message={errorMessage} />}</div>
         <form className="login-form" onSubmit={handleSubmit}>
           <label htmlFor="username">Email</label>
           <input name="email" type="text" required />

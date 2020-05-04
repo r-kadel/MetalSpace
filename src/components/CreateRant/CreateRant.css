@@ -6,28 +6,53 @@ textarea {
   width: 100%;
   min-height: 100px;
   margin-bottom: 1.3em;
-  border: 1px solid grey;
   display: flex;
   flex-direction: column;
   align-items: flex-end;
+  border-radius: 8px;
+  padding: .4em;
 }
 
 .create-rant-textarea {
   font-size: 1.125rem;
   width: 100%;
+  padding: .3em;
+  border-radius: 8px;
+  color: white;
+  background-color: rgba(255, 255, 255, .02);
+  border: 3px solid grey;
+}
 
+.create-rant-textarea:focus {
+  border-color: #95B46A;
+  border: 4px solid #95B46A;
 }
 
 .post-btn {
-  width: 105px;
   font-size: 1.25rem;
-  border-radius: 8px;
+  margin-top: .5em;
+  align-self: center;
+  background: none;
+  color: #95B46A;
+  border: none;
+  font-size: 1.4rem;
 }
 
-.post-btn:hover {
-  background-color: red;
+.post-tooltip {
+  position: relative;
+  bottom: 5px;
+  left: 5px;
+  border-radius: 20px;
+  padding: 0.4em;
+  font-weight: 100;
+  color: #95B46A;
+  background-color: rgba(255, 255, 255, 0.01);
+}
+
+.post-btn:hover, .post-btn:focus {
+  filter: brightness(150%);
 }
 
 .comment-active:active {
-  background-color: aqua;
+  background-color: #95B46A;
 }

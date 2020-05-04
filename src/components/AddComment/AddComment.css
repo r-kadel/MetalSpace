@@ -8,14 +8,60 @@
   
 .add-comment-textarea {
     width: 100%;
+    border-radius: 8px;
+    height: 50%;
+}
+
+.rant-actions {
+    margin-top: .6em;
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
 }
 
 .add-comment-btn {
-    width: 100px;
-    margin-top: .5em;
-    align-self: center;
+    border: none;
+    background: none;
+    font-size: 1.5rem;
+    color: #95B46A;
+}
+
+.cancel-btn {
+    border: none;
+    color: #DE1A1A;
+    font-size: 1.2rem;
+    background: none;
+    padding: .2em;
 }
   
-.add-comment-btn:hover {
-    background-color: #7CC6FE;
+.add-comment-btn:hover,
+.add-comment-btn:focus {
+    filter: brightness(150%);
 }
+
+.cancel-btn:hover,
+.cancel-btn:focus {
+    filter: brightness(350%);
+}
+
+.delete-tooltip {
+    position: relative;
+    bottom: 5px;
+    right: 5px;
+    border-radius: 20px;
+    padding: 0.4em;
+    font-weight: 100;
+    color: #DE1A1A;
+    background-color: rgba(255, 255, 255, 0.01);
+  }
+
+  .add-tooltip {
+    position: relative;
+    bottom: 5px;
+    left: 5px;
+    border-radius: 20px;
+    padding: 0.4em;
+    font-weight: 100;
+    color: #95B46A;
+    background-color: rgba(255, 255, 255, 0.01);
+  }

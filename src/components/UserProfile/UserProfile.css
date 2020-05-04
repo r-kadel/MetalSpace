@@ -1,23 +1,100 @@
 .personal-section {
-  border: 1px solid grey;
+  border: 3px solid rgba(255, 255, 255, 0.5);
   margin-top: 1em;
   width: 80%;
+  border-radius: 8px;
+  padding: 1em;
+  background-color: rgba(255, 255, 255, 0.125);
+}
+
+.img-box {
   display: flex;
-  justify-content: space-around;
-  align-items: center;
+  justify-content: center;
+}
+.profile-pic {
+  max-width: 100px;
+  margin: 0 auto;
 }
 
-.cog-li {
-  position: relative;
-  left: 10px;
-  top: 50px;
-  text-align: right;
+.bio-ul {
+  display: flex;
+  flex-direction: column;
+  margin-left: 25px;
 }
 
-.cog-btn {
+.bio-info {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.profile-footer {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 1em;
+}
+
+.profile-info {
+  display: flex;
+  justify-content: space-between;
+}
+
+.cog {
   cursor: pointer;
+  align-self: flex-end;
+  color: #95b46a;
+  border: none;
+  font-size: 1rem;
+  background: none;
+  padding: 0.2em;
 }
 
-.cog-btn:hover {
-  background-color: aqua;
+.cog:hover,
+.cog:focus {
+  filter: brightness(150%);
+}
+
+.pic-edit-btn {
+  border: none;
+  color: #95b46a;
+  font-size: 1.2rem;
+  background: none;
+  padding: 0.2em;
+}
+
+.pic-edit-btn:hover,
+.pic-edit-btn:focus {
+  filter: brightness(150%);  
+}
+
+.profile-pic {
+  box-shadow: -1px 1px 3px;
+}
+
+.page-text {
+  font-size: 1rem;
+  color: #95b46a;
+}
+
+
+.upload-tooltip {
+  position: relative;
+  bottom: 5px;
+  left: 5px;
+  border-radius: 20px;
+  padding: 0.4em;
+  font-weight: 100;
+  color: #95b46a;
+  background-color: rgba(255, 255, 255, 0.01);
+}
+
+.edit-tooltip {
+  position: relative;
+  bottom: 5px;
+  right: 5px;
+  border-radius: 20px;
+  padding: 0.4em;
+  font-weight: 100;
+  color: #95b46a;
+  background-color: rgba(255, 255, 255, 0.01);
 }

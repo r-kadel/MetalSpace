@@ -1,11 +1,12 @@
-import React, { useState, useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import { Context } from '../../Context/Context';
 import AddComment from '../AddComment/AddComment';
 import Comment from '../Comment/Comment';
 import './Rant.css';
 
 function Rant(props) {
-  const [liked, setLiked] = useState(false);
+  const [showCommentTip, setShowCommentTip] = useState(false);
+  const [showDeleteTip, setShowDeleteTip] = useState(false);
   const {
     userComments,
     showComment,
@@ -15,18 +16,22 @@ function Rant(props) {
     userData,
   } = useContext(Context);
 
-  function like() {
-    setLiked(!liked);
-  }
-
   function handleComment() {
     setShowComment(props.id);
-    console.log(pageData.id, userData.id)
   }
 
   function handleDelete() {
     deletePost(props.id);
   }
+
+  function deleteTipShow() {
+    setShowDeleteTip((prev) => !prev);
+  }
+
+  function commentTipShow() {
+    setShowCommentTip((prev) => !prev);
+  }
+
   //sort comments to their appropriate posts
   const postedComments = () =>
     userComments
@@ -47,42 +52,55 @@ function Rant(props) {
   return (
     <>
       <article className="rant">
-        <p>{props.content}</p>
-        <div className="post-time">
-          <span className="date">
-            Posted{' '}
-            {new Intl.DateTimeFormat('en-US', {
-              year: 'numeric',
-              month: 'long',
-              day: '2-digit',
-            }).format(date)}
-          </span>
-          <span className="time">
-            {new Intl.DateTimeFormat('en-US', {
-              hour: 'numeric',
-              minute: 'numeric',
-            }).format(date)}
-          </span>
+        <header className="rant-header">
+          <div className="author">
+            <img
+              src={pageData.image_url}
+              alt={pageData.username}
+              className="profile-thumb"
+            />{' '}
+            {pageData.username}
+          </div>
+          <div className="post-time">
+            <span className="date">
+              {new Intl.DateTimeFormat('en-US', {
+                year: 'numeric',
+                month: 'long',
+                day: '2-digit',
+              }).format(date)}
+            </span>
+            <span className="time">
+              {new Intl.DateTimeFormat('en-US', {
+                hour: 'numeric',
+                minute: 'numeric',
+              }).format(date)}
+            </span>
+          </div>
+        </header>
+        <div className="rant-content-box">
+          <p>{props.content}</p>
         </div>
-        <hr />
         <div className="rant-interactions">
-          {liked ? (
-            <button onClick={like} className="liked">
-              Like
-            </button>
-          ) : (
-            <button onClick={like}>Like</button>
-          )}
           <button
             onClick={handleComment}
-            className="comment-btn comment-active">
-            Comment
+            onMouseEnter={commentTipShow}
+            onMouseLeave={commentTipShow}
+            className="comment-btn-add comment-active">
+            <i className="fas fa-comments"></i>
+            {showCommentTip && (
+              <span className="comment-tooltip tooltip">Add A Comment</span>
+            )}
           </button>
           {pageData.id === userData.id ? (
             <button
               onClick={handleDelete}
-              className="comment-btn comment-active">
-              Delete
+              className="comment-btn-delete comment-active"
+              onMouseEnter={deleteTipShow}
+              onMouseLeave={deleteTipShow}>
+              {showDeleteTip && (
+                <span className="delete-tooltip tooltip">Delete Rant</span>
+              )}
+              <i className="far fa-trash-alt"></i>
             </button>
           ) : null}
         </div>

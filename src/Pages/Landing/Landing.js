@@ -1,6 +1,7 @@
 import React, { useContext, useEffect } from 'react';
 import { Link, useHistory } from 'react-router-dom';
 import { Context } from '../../Context/Context';
+import Error from '../../components/Error/Error';
 import './Landing.css';
 
 import TokenService from '../../services/token-service';
@@ -13,7 +14,9 @@ function Landing() {
     setErrorMessage,
     showLogin,
     setShowLogin,
-    userData
+    userData,
+    errorMessage,
+    hasError,
   } = useContext(Context);
   const history = useHistory();
 
@@ -31,7 +34,7 @@ function Landing() {
   useEffect(() => {
     if (TokenService.hasAuthToken()) {
       setLoggedIn(true);
-      history.push(`/userPage/${userData.id}`)
+      history.push(`/userPage/${userData.id}`);
     } else {
       history.push('/');
     }
@@ -40,6 +43,7 @@ function Landing() {
   return (
     <main className="container">
       <div className="landing-page">
+        {hasError && <Error message={errorMessage} />}
         <h1 className="welcome">Welcome to MetalSpace</h1>
         <p className="welcome-p">
           A place for metal heads created by metal heads to share music, videos,

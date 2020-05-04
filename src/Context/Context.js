@@ -22,24 +22,7 @@ function ContextProvider(props) {
   const [userData, setUserData] = useState({});
   const [pageData, setPageData] = useState({});
   const [showEdit, setShowEdit] = useState(false);
-
-  function register(userInfo) {
-    fetch(`${BASE_URL}/users`, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        Authorization: `bearer ${config.TOKEN_KEY}`,
-      },
-      body: JSON.stringify(userInfo),
-    })
-      .then((res) => {
-        if (!res.ok) res.json().then((e) => Promise.reject(e));
-      })
-      .catch((err) => {
-        setHasError(true);
-        setErrorMessage(err.error);
-      });
-  }
+  const [loading, setLoading] = useState(false);
 
   function getRants() {
     fetch(`${BASE_URL}/posts/`, {
@@ -93,8 +76,7 @@ function ContextProvider(props) {
       )
       .catch((err) => {
         setHasError(true);
-        console.log(err);
-        setErrorMessage(err.error, 'errorrrrr');
+        setErrorMessage(err.error);
       });
     setShowLogin(false);
     setErrorMessage('');
@@ -103,6 +85,7 @@ function ContextProvider(props) {
   function logOut() {
     TokenService.clearAuthToken();
     UserService.clearUserId();
+    setUserData({});
     setLoggedIn(false);
   }
 
@@ -125,6 +108,7 @@ function ContextProvider(props) {
       UserService.getUserId();
       getUserData(UserService.getUserId());
       setLoggedIn(true);
+      setLoading(true);
     } else {
       setLoggedIn(false);
     }
@@ -268,7 +252,6 @@ function ContextProvider(props) {
   }
 
   function patchUserData(updatedUser) {
-    console.log([updatedUser]);
     fetch(`${BASE_URL}/users/${userData.id}`, {
       method: 'PATCH',
       headers: {
@@ -276,16 +259,26 @@ function ContextProvider(props) {
         Authorization: `bearer ${TokenService.getAuthToken()}`,
       },
       body: JSON.stringify(updatedUser),
-    }).catch((err) => {
-      setHasError(true);
-      console.log(err);
-      setErrorMessage(err.error, 'post error');
-    });
-    setErrorMessage('');
-    setShowEdit(false);
-    setPageData((prevData) => {
-      return { ...prevData, ...updatedUser };
-    });
+    })
+      .then((res) => {
+        if (!res.ok) {
+          res.json().then((err) => {
+            setHasError(true);
+            setErrorMessage(err.error);
+          });
+        } else {
+          setErrorMessage('');
+          setShowEdit(false);
+          setPageData((prevData) => {
+            return { ...prevData, ...updatedUser };
+          });
+        }
+      })
+      .catch((err) => {
+        setHasError(true);
+        // console.log(err);
+        setErrorMessage(err.error, 'post error');
+      });
   }
 
   return (
@@ -308,7 +301,6 @@ function ContextProvider(props) {
         showComment,
         setShowComment,
         profilePic,
-        register,
         logIn,
         logOut,
         onPageLoad,
@@ -326,6 +318,9 @@ function ContextProvider(props) {
         showEdit,
         setShowEdit,
         patchUserData,
+        loading,
+        setLoading,
+        BASE_URL,
       }}>
       {props.children}
     </Context.Provider>

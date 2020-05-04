@@ -4,7 +4,6 @@
   background-color: #363732;
   height: 3.25rem;
   align-items: center;
-  color: #A51C30;
 }
 
 .nav-links {
@@ -33,22 +32,20 @@
   font-weight: bold;
 }
 
-.nav-btn:hover {
+.nav-btn:hover, .nav-btn:focus {
   border-bottom: inset;
   border-color: #95B46A;
   border-width: .2em;
   color: #95B46A;
 }
 
+.nav-thumb {
+  max-width: 25px;
+  margin-right: .3em;
+} 
+
 .search-btn {
   margin-left: 1em;
-}
-
-.logo:hover {
-  border-bottom: inset;
-  border-color: #7CC6FE;
-  border-width: .2em;
-  color: #7CC6FE;
 }
 
 .login-box {
@@ -61,5 +58,11 @@
   flex-basis: 10px;
   align-items: center;
   opacity: .95;
+}
+
+.profile-nav {
+  margin-left: .3em;
+  display: flex;
+  align-items: center;
 }
 

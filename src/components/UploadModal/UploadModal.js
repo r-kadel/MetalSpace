@@ -20,7 +20,6 @@ function UploadModal() {
   }
   // send image data to cloud storage and url to server
   async function uploadImageToCloud(data) {
-    console.log(data);
     try {
       const res = await fetch(`${CLOUDINARY_URL}/image/upload`, {
         method: 'POST',

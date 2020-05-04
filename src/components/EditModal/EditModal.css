@@ -9,6 +9,11 @@
   background-color: rgba(0, 0, 0, 0.5);
 }
 
+h2 {
+  color: #DE1A1A;
+  font-size: 1.25rem;
+}
+
 .edit-container {
   opacity: 1;
   background-color: white;
@@ -32,10 +37,26 @@
   margin: 1em auto;
   display: flex;
   flex-direction: column;
-  justify-content: center;
   align-items: center;
   height: 75%;
   width: 75%;
+}
+
+.edit-form > label {
+  color: #DE1A1A;
+}
+
+.edit-btn {
+  border: none;
+  background: #000;
+  margin-top: 1em;
+  color: #DE1A1A;
+  padding: .5em;
+  font-weight: bold;
+}
+
+.edit-btn:hover {
+  color: #95b46a;
 }
 
 .close-btn:hover,
