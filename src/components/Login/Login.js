@@ -5,11 +5,12 @@ import Error from '../../components/Error/Error';
 import { Context } from '../../Context/Context';
 
 function Login() {
-  const { setLoggedIn, logIn, setHasError, setShowLogin, hasError, errorMessage } = useContext(Context);
+  const { setLoggedIn, logIn, setHasError, setShowLogin, hasError, errorMessage, setLoading } = useContext(Context);
   const history = useHistory();
 
   function handleSubmit(e) {
     e.preventDefault();
+    setLoading(true);
     const { email, password } = e.target;
     const credentials = {
       email: email.value,

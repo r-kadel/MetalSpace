@@ -112,15 +112,24 @@ function UserProfile(props) {
           </div>
           <div className="bio-info">
             <ul className="bio-ul">
-              <li className="bio-li">Name: {props.profileData.username}</li>
+              <li className="bio-li">
+                <span className="page-text">Name: </span>{' '}
+                {props.profileData.username}
+              </li>
               {props.profileData.location ? (
-                <li className="bio-li">From: {props.profileData.location}</li>
+                <li className="bio-li">
+                  <span className="page-text">From: </span>{' '}
+                  {props.profileData.location}
+                </li>
               ) : (
-                <li className="bio-li">From: The Black Gates</li>
+                <li className="bio-li">
+                  <span className="page-text">From: </span>The Black Gates
+                </li>
               )}
               {props.profileData.favorite_band ? (
                 <li className="bio-li">
-                  Favorite Band: {props.profileData.favorite_band}
+                  <span className="page-text">Favorite Band: </span>Favorite
+                  Band: {props.profileData.favorite_band}
                 </li>
               ) : null}
             </ul>
