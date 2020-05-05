@@ -55,7 +55,6 @@ function ContextProvider(props) {
   }
 
   function logIn(credentials, cb) {
-    setLoading(true);
     fetch(`${BASE_URL}/auth/login/`, {
       method: 'POST',
       headers: {
