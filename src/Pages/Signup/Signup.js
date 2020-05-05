@@ -64,7 +64,7 @@ function Signup() {
     } = e.target;
 
     let errorArray = [];
-    if (password.value.trim().length < 4) {
+    if (password.value.trim().length < 3) {
       errorArray.push(
         <div key={1}>* Password must be at least four characters</div>
       );
@@ -75,7 +75,7 @@ function Signup() {
     if (username.value.trim().length < 3) {
       errorArray.push(
         <div key={3}>
-          * Please enter a valid username of at least thrree characters
+          * Please enter a valid username of at least three characters
         </div>
       );
     }
@@ -89,7 +89,7 @@ function Signup() {
       const userInfo = {
         username: username.value.trim(),
         password: password.value.trim(),
-        email: email.value.trim(),
+        email: email.value.trim().toLowerCase(),
         favorite_band: favorite_band.value.trim(),
         location: location.value.trim(),
       };
@@ -120,7 +120,7 @@ function Signup() {
           <input name="location" type="text" />
           <label htmlFor="favorite_band">Favorite Band?</label>
           <input name="favorite_band" type="text" />
-          <button className="regis-btn">Submit</button>
+          <button className="regis-btn">Sign Up</button>
         </form>
       )}
     </main>

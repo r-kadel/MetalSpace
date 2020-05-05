@@ -12,7 +12,7 @@
 .login-container {
   background-color: white;
   margin: 10% auto;
-  height: 25%;
+  height: 45%;
   width: 60%;
   box-shadow: 0 5px 8px 0 rgba(255, 255, 255, 0.3), 0 7px 20px 0 rgba(255, 255, 255, 0.17);
   animation-name: uploadopen;
@@ -60,8 +60,14 @@
 }
 
 .login-submit {
-  width: 100px;
-  margin-top: 1.2em;
+  margin-top: 1em;
+  border-radius: 3px;
+  font-size: 1.25rem;
+  color: #95B46A;
+  background: none;
+  border: none;
+  align-self: center;
+  padding: .5em;
   align-self: center;
 }
 
@@ -73,3 +79,19 @@
   display: block;
 }
 
+.regis-btn {
+  margin-top: 1em;
+  border-radius: 3px;
+  font-size: 1.25rem;
+  color: #95B46A;
+  background: none;
+  border: none;
+  align-self: center;
+  padding: .5em;
+}
+
+.regis-btn:hover {
+  color: #95B46A;
+  background: none;
+  border: 2px solid #95B46A;
+}

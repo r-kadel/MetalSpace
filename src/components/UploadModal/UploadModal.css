@@ -84,8 +84,8 @@ input[type='file'] {
   background-color: silver;
 }
 .file-drop > .file-drop-target.file-drop-dragging-over-target {
-  color: #ff6e40;
-  box-shadow: 0 0 13px 3px #ff6e40;
+  color: #95B46A;
+  box-shadow: 0 0 13px 3px #95B46A;
 }
 
 @keyframes uploadopen {

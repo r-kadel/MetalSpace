@@ -6,8 +6,8 @@ import pic from '../assets/stockuser.png';
 
 const Context = React.createContext();
 // change to local for development, dont forget the url in search!
-// const BASE_URL = 'http://localhost:8000/api';
-const BASE_URL = 'https://still-wave-10274.herokuapp.com/api';
+const BASE_URL = 'http://localhost:8000/api';
+// const BASE_URL = 'https://still-wave-10274.herokuapp.com/api';
 
 function ContextProvider(props) {
   const [userRants, setUserRants] = useState([]);
@@ -65,7 +65,10 @@ function ContextProvider(props) {
     })
       .then((res) =>
         !res.ok
-          ? res.json().then((e) => Promise.reject(e))
+          ? res.json().then(() => {     
+            setHasError(true);
+            setErrorMessage("Incorrect email or password, please try again"); 
+            setLoading(false);})
           : res.json().then((res) => {
               TokenService.saveAuthToken(res.authToken);
               UserService.saveUserId(res.userData.id);
@@ -166,6 +169,7 @@ function ContextProvider(props) {
     setErrorMessage('');
   }
 
+  //Set a default picture if none listed
   function getUserData(userId) {
     fetch(`${BASE_URL}/users/${userId}`, {
       headers: {
@@ -276,7 +280,6 @@ function ContextProvider(props) {
       })
       .catch((err) => {
         setHasError(true);
-        // console.log(err);
         setErrorMessage(err.error, 'post error');
       });
   }

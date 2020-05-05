@@ -52,6 +52,7 @@
 @media screen and (min-width: 850px) {
   .profile-pic {
     max-width: 180px;
+    max-height: 200px;
   }
   .user-page {
     height: 100%;
@@ -79,7 +80,7 @@
   }
   .rant-section {
     grid-area: content;
-    max-width: 800px;
+    max-width: 750px;
     justify-self: center;
   }
   .rant-content-box {
@@ -90,5 +91,6 @@
 @media screen and (min-width: 1050px) {
   .profile-pic {
     max-width: 250px;
+    max-height: 225px;
   }
 }

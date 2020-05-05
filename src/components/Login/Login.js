@@ -13,7 +13,7 @@ function Login() {
     setLoading(true);
     const { email, password } = e.target;
     const credentials = {
-      email: email.value,
+      email: email.value.toLowerCase(),
       password: password.value,
     };
     //Send user creds to logIn func in context for validation, then runs
@@ -53,7 +53,7 @@ function Login() {
           <input name="email" type="text" required />
           <label htmlFor="password">Password</label>
           <input name="password" type="password" required />
-          <button className="login-submit">Submit</button>
+          <button className="login-submit">Log In</button>
         </form>
       </div>
     </div>

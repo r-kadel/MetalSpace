@@ -29,7 +29,8 @@ function Rant(props) {
   function handleDelete() {
     deletePost(props.id);
   }
-
+  
+  //tooltip shows
   function deleteTipShow() {
     setShowDeleteTip((prev) => !prev);
   }

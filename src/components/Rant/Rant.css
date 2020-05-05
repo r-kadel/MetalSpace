@@ -2,10 +2,10 @@
   width: 100%;
   border: 2.5px solid #95B46A;
   padding: 1em;
-  padding-top: .3em;
+  padding-top: .1em;
   padding-bottom: .3em;
   min-height: 100px;
-  margin-top: 1em;
+  margin-top: 1.5em;
   border-radius: 8px;
   background-color: rgba(255, 255, 255, .125);
 }

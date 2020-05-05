@@ -64,7 +64,11 @@ function UserProfile(props) {
                     <span className="page-text">Favorite Band: </span>
                     {props.profileData.favorite_band}
                   </li>
-                ) : null}
+                ) : (
+                  <li className="bio-li">
+                    <span className="page-text">Favorite Band: </span>Dragonforce lol
+                  </li>
+                )}
               </ul>
               {showEdit && <EditModal />}
             </div>
@@ -131,7 +135,11 @@ function UserProfile(props) {
                   <span className="page-text">Favorite Band: </span>Favorite
                   Band: {props.profileData.favorite_band}
                 </li>
-              ) : null}
+              ) : (
+                <li className="bio-li">
+                  <span className="page-text">Favorite Band: </span>Dragonforce lol
+                </li>
+              )}
             </ul>
           </div>
         </section>

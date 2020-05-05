@@ -15,11 +15,19 @@
 }
 
 .regis-btn {
-  margin-top: 1.5rem;
-  width: 100px;
+  margin-top: 1em;
+  border-radius: 3px;
+  font-size: 1.25rem;
+  color: #95B46A;
+  background: none;
+  border: none;
   align-self: center;
+  padding: .5em;
 }
 
 .regis-btn:hover {
-  background-color: #BADA55;
+  color: #95B46A;
+  background: none;
+  border: 2px solid #95B46A;
 }
+
