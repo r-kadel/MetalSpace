@@ -62,8 +62,8 @@ function Landing() {
               are still in the development phase so any accounts created are
               subject to change or deletion.
             </li>
-            <li>Email Address: fakemail@yahoo.com</li>
-            <li>Password: 1234</li>
+            <li>Email Address: <span className="page-text">demo@yahoo.com</span></li>
+            <li>Password: <span className="page-text">666</span></li>
           </ul>
           <button
             className="landing-page-signin"

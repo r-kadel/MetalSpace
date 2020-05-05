@@ -6,8 +6,8 @@ import pic from '../assets/stockuser.png';
 
 const Context = React.createContext();
 // change to local for development, dont forget the url in search!
-const BASE_URL = 'http://localhost:8000/api';
-// const BASE_URL = 'https://still-wave-10274.herokuapp.com/api';
+// const BASE_URL = 'http://localhost:8000/api';
+const BASE_URL = 'https://still-wave-10274.herokuapp.com/api';
 
 function ContextProvider(props) {
   const [userRants, setUserRants] = useState([]);
