@@ -6,9 +6,14 @@ import pic from '../../assets/stockuser.png';
 import './Header.css';
 
 function Header() {
-  const { loggedIn, showLogin, setShowLogin, logOut, userData } = useContext(
-    Context
-  );
+  const {
+    loggedIn,
+    showLogin,
+    setShowLogin,
+    logOut,
+    userData,
+    setLoading,
+  } = useContext(Context);
   const defaultPic = pic;
 
   //display the login modal
@@ -17,25 +22,28 @@ function Header() {
   }
 
   function handleLogOut() {
+    setLoading(false);
     logOut();
   }
 
   return (
     <nav className="navbar">
       {loggedIn && (
-      <div className="profile-nav">
-        <Link to={`/userPage/${userData.id}`}>
-          <img
-            className="nav-thumb"
-            alt={userData.username}
-            src={userData.image_url ? userData.image_url : defaultPic}
-          />
-        </Link>
-        <Link className="nav-btn" to={`/userPage/${userData.id}`}>{userData.username}</Link>
-        <button className="search-btn nav-btn">
-          <Link to="/search">Search</Link>
-        </button>
-      </div>
+        <div className="profile-nav">
+          <Link to={`/userPage/${userData.id}`}>
+            <img
+              className="nav-thumb"
+              alt={userData.username}
+              src={userData.image_url ? userData.image_url : defaultPic}
+            />
+          </Link>
+          <Link className="nav-btn" to={`/userPage/${userData.id}`}>
+            {userData.username}
+          </Link>
+          <button className="search-btn nav-btn">
+            <Link to="/search">Search</Link>
+          </button>
+        </div>
       )}
       <ul className="nav-links">
         {!loggedIn && (

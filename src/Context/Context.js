@@ -65,10 +65,11 @@ function ContextProvider(props) {
     })
       .then((res) =>
         !res.ok
-          ? res.json().then(() => {     
-            setHasError(true);
-            setErrorMessage("Incorrect email or password, please try again"); 
-            setLoading(false);})
+          ? res.json().then(() => {
+              setHasError(true);
+              setErrorMessage('Incorrect email or password, please try again');
+              setLoading(false);
+            })
           : res.json().then((res) => {
               TokenService.saveAuthToken(res.authToken);
               UserService.saveUserId(res.userData.id);
@@ -83,6 +84,7 @@ function ContextProvider(props) {
       });
     setShowLogin(false);
     setErrorMessage('');
+    setLoading(false);
   }
 
   function logOut() {
@@ -136,7 +138,7 @@ function ContextProvider(props) {
       .catch((err) => {
         setHasError(true);
         console.log(err);
-        setErrorMessage(err.error, 'post error');
+        setErrorMessage(err.error);
       });
     setErrorMessage('');
   }
