@@ -132,8 +132,7 @@ function UserProfile(props) {
               )}
               {props.profileData.favorite_band ? (
                 <li className="bio-li">
-                  <span className="page-text">Favorite Band: </span>Favorite
-                  Band: {props.profileData.favorite_band}
+                  <span className="page-text">Favorite Band: </span>{props.profileData.favorite_band}
                 </li>
               ) : (
                 <li className="bio-li">
