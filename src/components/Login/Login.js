@@ -5,7 +5,15 @@ import Error from '../../components/Error/Error';
 import { Context } from '../../Context/Context';
 
 function Login() {
-  const { setLoggedIn, logIn, setHasError, setShowLogin, hasError, errorMessage, setLoading } = useContext(Context);
+  const {
+    setLoggedIn,
+    logIn,
+    setHasError,
+    setShowLogin,
+    hasError,
+    errorMessage,
+    setLoading,
+  } = useContext(Context);
   const history = useHistory();
 
   function handleSubmit(e) {
@@ -23,6 +31,7 @@ function Login() {
       email.value = '';
       password.value = '';
       setLoggedIn(true);
+      setLoading(false);
       history.push(`/userPage/${id}`);
     });
   }
@@ -47,7 +56,9 @@ function Login() {
             &times;
           </span>
         </header>
-        <div>{hasError && <Error className="sys-message" message={errorMessage} />}</div>
+        <div>
+          {hasError && <Error className="sys-message" message={errorMessage} />}
+        </div>
         <form className="login-form" onSubmit={handleSubmit}>
           <label htmlFor="username">Email</label>
           <input name="email" type="text" required />

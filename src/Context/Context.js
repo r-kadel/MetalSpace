@@ -85,7 +85,6 @@ function ContextProvider(props) {
       });
     setShowLogin(false);
     setErrorMessage('');
-    setLoading(false);
   }
 
   function logOut() {
